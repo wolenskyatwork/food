@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import logo from './logo.svg';
 import './App.css';
 import FoodColumn from './food-column';
-import Foods from './foods';
+import Foods, { lightFirst } from './foods';
 import TimeInput from './time-input';
+import Meal from './meal';
 
 class App extends Component {
   constructor() {
@@ -19,13 +21,26 @@ class App extends Component {
     };
   }
 
+  getMoment = (numberTime, addTime) => {
+    return moment().hour(numberTime).minute(0).add(addTime, 'h').format('h:mma');
+  }
+
   handleSubmit = (finishTime) => {
     const numberTime = parseInt(finishTime);
 
     this.setState({
-      three: [numberTime + 2, numberTime + 4],
-      four: [numberTime + 2 + 3, numberTime + 4 + 5],
-      five: [numberTime + 2 + 3 + 3, numberTime + 4 + 5 + 5],
+      three: [
+        this.getMoment(numberTime, 2),
+        this.getMoment(numberTime, 4),
+      ],
+      four: [
+        this.getMoment(numberTime, 5),
+        this.getMoment(numberTime, 9),
+      ],
+      five: [
+        this.getMoment(numberTime, 8),
+        this.getMoment(numberTime, 14),
+      ],
     });
   }
 
@@ -48,15 +63,39 @@ class App extends Component {
         <div>
           <TimeInput label='Finishing workout' handleSubmit={this.handleSubmit} />
         </div>
-        <div>
-          Meal times
-          <div>Meal one: {one}</div>
-          <div>Meal two: {two}</div>
-          <div>Meal three: {`${three[0]} - ${three[1]}`}</div>
-          <div>Meal four: {`${four[0]} - ${four[1]}`}</div>
-          <div>Meal five: {`${five[0]} - ${five[1]}`}</div>
-          <div>Meal six: {six}</div>
+        <div className='flex-box'>
+          <Meal
+            number='one'
+            amounts={lightFirst.amounts.meal1}
+            hourRange={one}
+          />
+          <Meal
+            number='two'
+            amounts={lightFirst.amounts.meal2}
+            hourRange={two}
+          />
+          <Meal
+            number='three'
+            amounts={lightFirst.amounts.meal3}
+            hourRange={three}
+          />
+          <Meal
+            number='four'
+            amounts={lightFirst.amounts.meal4}
+            hourRange={four}
+          />
+          <Meal
+            number='five'
+            amounts={lightFirst.amounts.meal5}
+            hourRange={five}
+          />
+          <Meal
+            number='six'
+            amounts={lightFirst.amounts.meal6}
+            hourRange={six}
+          />
         </div>
+
         <div className='category flex-box'>
           <FoodColumn choices={Foods.vegetables} />
           <FoodColumn choices={Foods.meats} />
