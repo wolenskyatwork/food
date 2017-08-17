@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import TimeChooser from './time-chooser';
+import CarbChooser from './carb-chooser';
+import moment from 'moment';
 
 class Meal extends Component {
   render() {
@@ -6,12 +9,26 @@ class Meal extends Component {
       number,
       amounts,
       hourRange,
+      time,
+      handleTimeChange,
     } = this.props;
 
     return (
       <div className='Meal flex-box column sixth'>
         <h3>{`meal#${number}`}</h3>
-        <h4>{`${hourRange[0]} - ${hourRange[1]}`}</h4>
+        <CarbChooser amount={amounts.carbs}/>
+        {hourRange && time &&
+          <div>
+            <h4>{moment(time).format('h:mma')}</h4>
+
+            <TimeChooser
+              handleTimeChange={handleTimeChange}
+              hourRange={hourRange}
+              mealKey={number}
+              time={time}
+            />
+          </div>
+        }
         <div>
           <div>
             <div>{`Protein: ${amounts.protein} ounces`}</div>

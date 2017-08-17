@@ -26,6 +26,10 @@
   padding-top: 50px;
 }
 
+.foodcolumn {
+  flex-basis: 25%;
+}
+
 .sixth {
   flex-basis: 16.667%;
 }

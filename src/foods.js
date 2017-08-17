@@ -34,22 +34,27 @@ const fats = [
   '2 tbsp nut butter',
 ];
 
-const carbs = [
-  'Rice',
-  'Oatmeal',
-  'Sweet Potatoes',
-  'Quinoa',
-  'Fruit',
-];
+export const carbPercentages = {
+  'Rice': 0.27,
+  'Oatmeal': 0.7,
+  'Sweet Potatoes': 0.2,
+  'Quinoa': 0.6,
+  'Strawberries': 0.08,
+  'Bananas': 0.23,
+  'Blueberries': 0.15,
+  'Apple': 0.14,
+};
+
+const carbs = Object.keys(carbPercentages);
 
 export const lightFirst = {
   times: {
-    meal1: '2/3 on waking, 1/3 during workout',
-    meal2: '20 minutes after workout',
+    meal1: ['2/3 on waking, 1/3 during workout', ''],
+    meal2: ['20 minutes after workout', ],
     meal3: [2,4],
     meal4: [3,5],
     meal5: [3,5],
-    meal6: 'bedtime',
+    meal6: ['bedtime', ''],
   },
   amounts: {
     meal1: {
