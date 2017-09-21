@@ -3,7 +3,7 @@ import moment from 'moment';
 import logo from './logo.svg';
 import './App.css';
 import FoodColumn from './food-column';
-import Foods, { lightFirst } from './foods';
+import Foods, { afterChoices } from './foods';
 import TimeInput from './time-input';
 import Meal from './meal';
 
@@ -12,14 +12,24 @@ class App extends Component {
     super();
 
     this.state = {
+      one: null,
+      two: null,
       three: null,
       four: null,
       five: null,
+      six: null,
+      after: 0,
     };
   }
 
   getMomentFromString = (numberTime, addTime) => {
     return moment().hour(numberTime).minute(0).second(0).add(addTime, 'h').toString();
+  }
+
+  handleChooseAfter = (event) => {
+    this.setState({
+      after: event.target.value,
+    });
   }
 
   handleSubmit = (finishTime) => {
@@ -61,11 +71,16 @@ class App extends Component {
 
   render() {
     const {
+      one,
+      two,
       three,
       four,
       five,
+      six,
+      after,
     } = this.state;
-    console.log(this.state);
+
+    const plan = afterChoices[after];
 
     return (
       <div className="App">
@@ -74,49 +89,63 @@ class App extends Component {
           <h2></h2>
         </div>
         <div>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              After how many meals will your workout be?
+              <select value={this.state.after} onChange={this.handleChooseAfter}>
+                {
+                  afterChoices.map((plan, i) => {
+                    return <option key={i} value={i}>{i}</option>
+                  })
+                }
+              </select>
+            </label>
+          </form>
+        </div>
+        <div>
           <TimeInput label='Finishing workout' handleSubmit={this.handleSubmit} />
         </div>
         <div className='flex-box'>
           <Meal
+            time={one}
             number='one'
-            amounts={lightFirst.amounts.meal1}
+            meal={plan.first}
           />
           <Meal
+            time={two}
             number='two'
-            amounts={lightFirst.amounts.meal2}
+            meal={plan.second}
           />
           <Meal
-            number='three'
-            amounts={lightFirst.amounts.meal3}
             time={three}
-            hourRange={[2,4]}
+            number='three'
+            meal={plan.third}
             handleTimeChange={this.handleTimeChangeThree}
           />
           <Meal
-            number='four'
-            amounts={lightFirst.amounts.meal4}
             time={four}
-            hourRange={[3,5]}
+            number='four'
+            meal={plan.fourth}
             handleTimeChange={this.handleTimeChangeFour}
           />
           <Meal
-            number='five'
-            amounts={lightFirst.amounts.meal5}
-            hourRange={[3,5]}
             time={five}
+            number='five'
+            meal={plan.fifth}
             handleTimeChange={this.handleTimeChangeFive}
           />
           <Meal
+            time={six}
             number='six'
-            amounts={lightFirst.amounts.meal6}
+            meal={plan.sixth}
           />
         </div>
 
         <div className='category flex-box'>
-          <FoodColumn choices={Foods.vegetables} />
-          <FoodColumn choices={Foods.meats} />
-          <FoodColumn choices={Foods.fats} />
-          <FoodColumn choices={Foods.carbs} />
+          <FoodColumn column='Vegetables' choices={Foods.vegetables} />
+          <FoodColumn column='Meats' choices={Foods.meats} />
+          <FoodColumn column='Fats' choices={Foods.fats} />
+          <FoodColumn column='Carbs' choices={Foods.carbs} />
         </div>
       </div>
     );

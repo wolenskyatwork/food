@@ -22,7 +22,7 @@ class CarbChooser extends Component {
     const { amount } = this.props
 
     return (
-      <div>
+      <div className='carbbox'>
         <form onSubmit={this.handleSubmit}>
           <label>
             What carbs are you going to eat?

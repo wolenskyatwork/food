@@ -34,6 +34,28 @@
   flex-basis: 16.667%;
 }
 
+.column-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.column-subtitle {
+  padding: 20px 0;
+  font-weight: bold;
+}
+
+.timeframe {
+  height: 90px;
+}
+
+.carbbox {
+  height: 120px;
+}
+
+.Meal {
+  border: 1px black solid;
+}
+
 /*@keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

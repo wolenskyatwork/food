@@ -7,28 +7,27 @@ class Meal extends Component {
   render() {
     const {
       number,
-      amounts,
-      hourRange,
-      time,
+      meal: {
+        subtitle,
+        amounts,
+        hourRange,
+        time,
+      },
       handleTimeChange,
     } = this.props;
 
     return (
       <div className='Meal flex-box column sixth'>
-        <h3>{`meal#${number}`}</h3>
-        <CarbChooser amount={amounts.carbs}/>
-        {hourRange && time &&
-          <div>
-            <h4>{moment(time).format('h:mma')}</h4>
+        <div className='column-title'>{`meal#${number}`}</div>
+        <div className='timeframe'>
+          {subtitle &&
+            <div className='column-subtitle'>{subtitle}</div>
+          }
+          {!subtitle && time &&
+            <div className='column-subtitle'>{moment(time).format('h:mma')}</div>
+          }
+        </div>
 
-            <TimeChooser
-              handleTimeChange={handleTimeChange}
-              hourRange={hourRange}
-              mealKey={number}
-              time={time}
-            />
-          </div>
-        }
         <div>
           <div>
             <div>{`Protein: ${amounts.protein} ounces`}</div>
@@ -49,6 +48,21 @@ class Meal extends Component {
           <div>
             <div>{`Workout carbs: ${amounts.workoutCarbs} grams`}</div>
           </div>
+
+          {hourRange && time &&
+            <div>
+              <div className='column-subtitle'>{moment(time).format('h:mma')}</div>
+
+              <TimeChooser
+                handleTimeChange={handleTimeChange}
+                hourRange={hourRange}
+                mealKey={number}
+                time={time}
+              />
+            </div>
+          }
+
+          <CarbChooser amount={amounts.carbs}/>
 
         </div>
       </div>
