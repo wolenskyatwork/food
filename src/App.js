@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import logo from './logo.svg';
+import chicken from './images/chicken.svg';
+import biker from './images/biker.svg';
+import muaythai from './images/muaythai.svg';
 import './App.css';
 import FoodColumn from './food-column';
-import Foods, { afterChoices } from './foods';
+import Foods, { baseAfterChoices, baseTotals } from './foods';
 import TimeInput from './time-input';
 import Meal from './meal';
 
@@ -12,80 +14,70 @@ class App extends Component {
     super();
 
     this.state = {
-      one: null,
-      two: null,
-      three: null,
-      four: null,
-      five: null,
-      six: null,
+      times: [null, null, null, null, null, null],
       after: 0,
+      waking: null,
     };
   }
 
   getMomentFromString = (numberTime, addTime) => {
-    return moment().hour(numberTime).minute(0).second(0).add(addTime, 'h').toString();
+    return moment().hour(numberTime).minute(0).second(0).add(addTime, 'h');
   }
 
   handleChooseAfter = (event) => {
     this.setState({
-      after: event.target.value,
+      after: Number(event.target.value),
     });
   }
 
-  handleSubmit = (finishTime) => {
-    const numberTime = parseInt(finishTime);
+  handleSubmitWorkout = (event) => {
+    const times = this.state.times;
+    times[this.state.after] = this.getMomentFromString(event, 0);
+
+    times.map((time, index) => {
+      const { after } = this.state;
+      const plan = baseAfterChoices[after][index];
+      if (plan.hours && times[plan.hours.number]) {
+        return times[plan.hours.number].add(plan.hours.begin, 'hours');
+      }
+      return time;
+    })
 
     this.setState({
-      three: this.getMomentFromString(numberTime, 2),
-      four: this.getMomentFromString(numberTime, 5),
-      five: this.getMomentFromString(numberTime, 8),
+      times,
     });
   }
 
-  handleTimeChangeThree = (value) => {
-    const momentThree = moment(value);
-
+  handleSubmitWaking = (event) => {
     this.setState({
-      three: momentThree.toString(),
-      four: momentThree.add(3, 'h').toString(),
-      five: momentThree.add(6, 'h').toString(),
+      waking: moment().hour(event).minute(0).second(0),
     })
   }
 
-  handleTimeChangeFour = (value) => {
-    const momentFour = moment(value);
+  updateTime = (number, time) => {
+    const times = this.state.times;
+
+    times[number] = time;
 
     this.setState({
-      four: momentFour.toString(),
-      five: momentFour.add(3, 'h').toString(),
-    })
-  }
-
-  handleTimeChangeFive = (value) => {
-    const momentFive = moment(value);
-
-    this.setState({
-      five: momentFive.toString(),
-    })
+      times,
+    });
   }
 
   render() {
     const {
-      one,
-      two,
-      three,
-      four,
-      five,
-      six,
+      times,
       after,
+      waking,
     } = this.state;
 
-    const plan = afterChoices[after];
-
+    const plan = baseAfterChoices[after];
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={muaythai} className="App-logo" alt="logo" />
+          <img src={chicken} className="App-logo" alt="logo" />
+          <img src={biker} className="App-logo" alt="logo" />
           <h2></h2>
         </div>
         <div>
@@ -94,7 +86,7 @@ class App extends Component {
               After how many meals will your workout be?
               <select value={this.state.after} onChange={this.handleChooseAfter}>
                 {
-                  afterChoices.map((plan, i) => {
+                  baseAfterChoices.map((plan, i) => {
                     return <option key={i} value={i}>{i}</option>
                   })
                 }
@@ -102,50 +94,61 @@ class App extends Component {
             </label>
           </form>
         </div>
+        { /*
         <div>
-          <TimeInput label='Finishing workout' handleSubmit={this.handleSubmit} />
+          <TimeInput label='Wake up' handleSubmit={this.handleSubmitWaking} />
+          <TimeInput label='Finishing workout' handleSubmit={this.handleSubmitWorkout} />
         </div>
+        */ }
         <div className='flex-box'>
           <Meal
-            time={one}
-            number='one'
-            meal={plan.first}
+            time={waking}
+            number={0}
+            meal={plan[0]}
           />
           <Meal
-            time={two}
-            number='two'
-            meal={plan.second}
+            times={times}
+            time={times[1]}
+            number={1}
+            meal={plan[1]}
+            updateTime={this.updateTime}
           />
           <Meal
-            time={three}
-            number='three'
-            meal={plan.third}
-            handleTimeChange={this.handleTimeChangeThree}
+            times={times}
+            time={times[2]}
+            number={2}
+            meal={plan[2]}
+            updateTime={this.updateTime}
           />
           <Meal
-            time={four}
-            number='four'
-            meal={plan.fourth}
-            handleTimeChange={this.handleTimeChangeFour}
+            times={times}
+            time={times[3]}
+            number={3}
+            meal={plan[3]}
+            updateTime={this.updateTime}
           />
           <Meal
-            time={five}
-            number='five'
-            meal={plan.fifth}
-            handleTimeChange={this.handleTimeChangeFive}
+            times={times}
+            time={times[4]}
+            number={4}
+            meal={plan[4]}
+            updateTime={this.updateTime}
           />
           <Meal
-            time={six}
-            number='six'
-            meal={plan.sixth}
+            times={times}
+            time={times[5]}
+            number={5}
+            meal={plan[5]}
+            updateTime={this.updateTime}
           />
         </div>
 
         <div className='category flex-box'>
-          <FoodColumn column='Vegetables' choices={Foods.vegetables} />
-          <FoodColumn column='Meats' choices={Foods.meats} />
-          <FoodColumn column='Fats' choices={Foods.fats} />
-          <FoodColumn column='Carbs' choices={Foods.carbs} />
+          <FoodColumn column='Vegetables' unit='small handfuls' choices={Foods.vegetables} total={baseTotals[after].veggies}/>
+          <FoodColumn column='Protein' unit='grams' choices={Foods.meats} total={baseTotals[after].protein}/>
+          <FoodColumn column='Fats' unit='servings' choices={Foods.fats} total={baseTotals[after].fat}/>
+          <FoodColumn column='Carbs' unit='grams' choices={Foods.carbs} total={baseTotals[after].carbs}/>
+          <FoodColumn column='Workout Carbs' unit='grams' choices={Foods.workoutCarbs} total={baseTotals[after].workoutCarbs}/>
         </div>
       </div>
     );

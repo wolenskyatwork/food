@@ -11,26 +11,45 @@ class Meal extends Component {
         subtitle,
         amounts,
         hourRange,
-        time,
+        hours,
+        isWorkout,
       },
       handleTimeChange,
+      time,
+      times,
+      updateTime,
     } = this.props;
+
+    let displayTime;
+
+    if (hours && times && (hours.number || hours.number === 0) && times[hours.number]) {
+      displayTime = times[hours.number].add(hours.begin, 'hours');
+    } else {
+      displayTime = time
+    }
+
+    if (time === null && displayTime) {
+      // updateTime(number, displayTime);
+    }
 
     return (
       <div className='Meal flex-box column sixth'>
         <div className='column-title'>{`meal#${number}`}</div>
         <div className='timeframe'>
+          {isWorkout &&
+            <div className=''>Workout Meal</div>
+          }
           {subtitle &&
             <div className='column-subtitle'>{subtitle}</div>
           }
-          {!subtitle && time &&
-            <div className='column-subtitle'>{moment(time).format('h:mma')}</div>
+          {displayTime &&
+            <div className='column-subtitle'>{moment(displayTime).format('h:mma')}</div>
           }
         </div>
 
         <div>
           <div>
-            <div>{`Protein: ${amounts.protein} ounces`}</div>
+            <div>{`Protein: ${amounts.protein} grams`}</div>
           </div>
 
           <div>

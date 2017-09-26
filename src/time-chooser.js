@@ -42,6 +42,7 @@ class TimeChooser extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           What time will you actually eat this?
+          {`${this.props.hourRange[0]}, ${this.props.hourRange[1]}`}
           <select value={this.state.value} onChange={this.handleChange}>
             {
               this.createValues().map((time, i) => {
