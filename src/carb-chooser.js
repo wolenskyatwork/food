@@ -36,7 +36,7 @@ class CarbChooser extends Component {
           </label>
         </form>
         <div>
-          <div>Carb Weight: {(amount/carbPercentages[carb]).toFixed(3)} grams</div>
+          <div><span className='bold'>Carb Weight: </span>{(amount/carbPercentages[carb]).toFixed(3)} grams</div>
         </div>
       </div>
     );

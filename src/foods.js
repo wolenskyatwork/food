@@ -42,10 +42,10 @@ const fats = [
 ];
 
 export const carbPercentages = {
-  'Rice': 0.27,
-  'Oatmeal': 0.7,
-  'Sweet Potatoes': 0.2,
-  'Quinoa': 0.6,
+  'Cooked Rice': 0.25846,
+  'Dry Oatmeal': 0.7143,
+  'Cooked Sweet Potatoes': 0.2,
+  'Cooked Quinoa': 0.35, // .21
   'Strawberries': 0.08,
   'Bananas': 0.23,
   'Blueberries': 0.15,
@@ -54,7 +54,7 @@ export const carbPercentages = {
 
 const carbs = Object.keys(carbPercentages);
 
-const lightZero = [
+const lightZeroBase = [
   {
     isWorkout: true,
     hourRange: null,
@@ -80,7 +80,7 @@ const lightZero = [
     },
     subtitle: '20 minutes after workout',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 40,
@@ -99,7 +99,7 @@ const lightZero = [
     },
     subtitle: '2-4 hours after last meal',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 35,
@@ -118,7 +118,7 @@ const lightZero = [
     },
     subtitle: '3-5 hours after last meal',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 15,
@@ -137,7 +137,7 @@ const lightZero = [
     },
     subtitle: '3-5 hours after last meal',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 1,
       carbs: 15,
@@ -159,7 +159,7 @@ const lightZero = [
   }
 ];
 
-const lightOne = [
+const lightOneBase = [
   {
     isWorkout: false,
     hourRange: [1,3],
@@ -171,7 +171,7 @@ const lightOne = [
     },
     subtitle: '1-3 hours before workout',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: .5,
       carbs: 35,
@@ -204,7 +204,7 @@ const lightOne = [
     },
     subtitle: '40 minutes after workout is over',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 40,
@@ -223,7 +223,7 @@ const lightOne = [
     },
     subtitle: '2-4 hours after last meal',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 35,
@@ -242,7 +242,7 @@ const lightOne = [
     },
     subtitle: '3-5 hours after last meal',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 1,
       carbs: 15,
@@ -264,14 +264,224 @@ const lightOne = [
   }
 ];
 
-const lightTwo = [
+const moderateOneCutOne = [
+  {
+    isWorkout: false,
+    hourRange: [1,3],
+    hours: {
+      after: false,
+      number: 1,
+      begin: 1,
+      end: 3,
+    },
+    subtitle: '1-3 hours before workout',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0,
+      carbs: 50,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: true,
+    after: true,
+    hourRange: null,
+    hours: null,
+    subtitle: '1/2 shake during workout, 1/2 right after',
+    amounts: {
+      protein: '25 g whey protein',
+      veggies: 0,
+      fat: 0,
+      carbs: 0,
+      workoutCarbs: 20,
+    },
+  },
+  {
+    isWorkout: false,
+    after: true,
+    hourRange: [0.666,0.666],
+    hours: {
+      after: true,
+      number: 2,
+      begin: 0.666,
+      end: 0.666,
+    },
+    subtitle: '40 minutes after workout is over',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 60,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [2-4],
+    after: true,
+    hours: {
+      after: true,
+      number: 3,
+      begin: 2,
+      end: 4,
+    },
+    subtitle: '2-4 hours after last meal',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 50,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [3,5],
+    after: true,
+    hours: {
+      after: true,
+      number: 4,
+      begin: 3,
+      end: 5,
+    },
+    subtitle: '3-5 hours after last meal',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 20,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: null,
+    hours: null,
+    subtitle: 'bedtime',
+    amounts: {
+      protein: '25g casein',
+      veggies: 0,
+      fat: 0.5,
+      carbs: 0,
+      workoutCarbs: 0,
+    },
+  }
+];
+
+const moderateAfterThreeCutOne = [
+  {
+    isWorkout: false,
+    hourRange: null,
+    hours: null,
+    subtitle: 'Upon waking',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0,
+      carbs: 0,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    after: true,
+    hourRange: [3,5],
+    hours: {
+      after: false,
+      number: 1,
+      begin: 3,
+      end: 5,
+    },
+    subtitle: '3-5 hours after last meal',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0,
+      carbs: 15,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    after: false,
+    hourRange: [1,3],
+    hours: {
+      after: false,
+      number: 2,
+      begin: 1,
+      end: 3,
+    },
+    subtitle: '1-3 hours before workout',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 35,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: true,
+    hourRange: [2-4],
+    after: true,
+    hours: {
+      after: true,
+      number: 3,
+      begin: 2,
+      end: 4,
+    },
+    subtitle: '1/2 shake during workout, 1/2 right after',
+    amounts: {
+      protein: '25g whey protein in water',
+      veggies: 0,
+      fat: 0,
+      carbs: 0,
+      workoutCarbs: 15,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [3,5],
+    after: true,
+    hours: {
+      after: true,
+      number: 4,
+      begin: 3,
+      end: 5,
+    },
+    subtitle: '40 minutes after workout is over',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 40,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: null,
+    hours: null,
+    subtitle: 'bedtime',
+    amounts: {
+      protein: '25g casein',
+      veggies: 0,
+      fat: 0.5,
+      carbs: 35,
+      workoutCarbs: 0,
+    },
+  }
+];
+
+const lightTwoBase = [
   {
     isWorkout: false,
     hourRange: null,
     hours: null,
     subtitle: 'Waking',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: .5,
       carbs: 0,
@@ -290,7 +500,7 @@ const lightTwo = [
     },
     subtitle: '1-3 hours before workout',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 35,
@@ -323,7 +533,7 @@ const lightTwo = [
     },
     subtitle: '40 minutes after workout is over',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 40,
@@ -342,7 +552,7 @@ const lightTwo = [
     },
     subtitle: '2-4 hours after last meal',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 1,
       carbs: 35,
@@ -364,14 +574,14 @@ const lightTwo = [
   }
 ];
 
-const lightThree = [
+const lightThreeBase = [
   {
     isWorkout: false,
     hourRange: null,
     hours: null,
     subtitle: 'Waking',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 1,
       carbs: 0,
@@ -390,7 +600,7 @@ const lightThree = [
     },
     subtitle: '3-5 hours after last meal',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 15,
@@ -409,7 +619,7 @@ const lightThree = [
     },
     subtitle: '1-3 hours before workout',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 35,
@@ -442,7 +652,7 @@ const lightThree = [
     },
     subtitle: '40 minutes after workout is over',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 40,
@@ -464,13 +674,13 @@ const lightThree = [
   }
 ];
 
-const lightFour = [
+const lightFourBase = [
   {
     isWorkout: false,
     hourRange: null,
     subtitle: 'waking',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 1,
       carbs: 0,
@@ -482,7 +692,7 @@ const lightFour = [
     hourRange: [3,5],
     subtitle: '3-5 hours after last meal',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 15,
@@ -494,7 +704,7 @@ const lightFour = [
     hourRange: [3,5],
     subtitle: '3-5 hours after last meal',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 15,
@@ -506,7 +716,7 @@ const lightFour = [
     hourRange: [1,3],
     subtitle: '1-3 hours before workout',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 0.5,
       carbs: 35,
@@ -530,7 +740,7 @@ const lightFour = [
     hourRange: null,
     subtitle: 'bedtime',
     amounts: {
-      protein: 18,
+      protein: 3,
       veggies: 2,
       fat: 1,
       carbs: 60,
@@ -539,43 +749,183 @@ const lightFour = [
   },
 ];
 
-export const baseAfterChoices = [lightZero, lightOne, lightTwo, lightThree, lightFour];
+const nonTrainingBase = [
+  {
+    isWorkout: false,
+    hourRange: null,
+    subtitle: 'waking',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 1,
+      carbs: 0,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [3,5],
+    subtitle: '3-5 hours after last meal',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 1,
+      carbs: 0,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [3,5],
+    subtitle: '3-5 hours after last meal',
+    amounts: {
+      protein: 4,
+      veggies: 2,
+      fat: 1,
+      carbs: 20,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [3,5],
+    subtitle: '3-5 hours after last meal',
+    amounts: {
+      protein: 4,
+      veggies: 2,
+      fat: 1,
+      carbs: 25,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: null,
+    subtitle: 'bedtime',
+    amounts: {
+      protein: '30 g casein',
+      veggies: 0,
+      fat: 2,
+      carbs: 25,
+      workoutCarbs: 0,
+    },
+  },
+];
+
+const nonTrainingCutOne = [
+  {
+    isWorkout: false,
+    hourRange: null,
+    subtitle: 'waking',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 0,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [3,5],
+    subtitle: '3-5 hours after last meal',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 0,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [3,5],
+    subtitle: '3-5 hours after last meal',
+    amounts: {
+      protein: 4,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 20,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [3,5],
+    subtitle: '3-5 hours after last meal',
+    amounts: {
+      protein: 4,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 25,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: null,
+    subtitle: 'bedtime',
+    amounts: {
+      protein: '30 g casein',
+      veggies: 0,
+      fat: 0.5,
+      carbs: 25,
+      workoutCarbs: 0,
+    },
+  },
+];
+// lightZeroBase, lightOneBase, lightTwoBase, lightThreeBase, lightFourBase,
+export const afterChoices = [nonTrainingCutOne, moderateOneCutOne, moderateAfterThreeCutOne];
 
 export const baseTotals = [
   {
-    protein: 72,
+    protein: 12,
     veggies: 8,
     fat: 3.5,
     carbs: 105,
     workoutCarbs: 35,
   },
   {
-    protein: 72,
+    protein: 12,
     veggies: 8,
     fat: 3.5,
     carbs: 125,
     workoutCarbs: 15,
   },
   {
-    protein: 72,
+    protein: 12,
     veggies: 8,
     fat: 3.5,
     carbs: 125,
     workoutCarbs: 15,
   },
   {
-    protein: 72,
+    protein: 12,
     veggies: 8,
     fat: 3.5,
     carbs: 125,
     workoutCarbs: 15,
   },
   {
-    protein: 90,
+    protein: 15,
     veggies: 10,
     fat: 3.5,
     carbs: 105,
     workoutCarbs: 15,
+  },
+  {
+    protein: 14,
+    veggies: 8,
+    fat: 6,
+    carbs: 70,
+    workoutCarbs: 0,
+  },
+  { // THESE ARE WRONG
+    protein: 14,
+    veggies: 8,
+    fat: 6,
+    carbs: 70,
+    workoutCarbs: 0,
   },
 ];
 

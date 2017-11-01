@@ -34,11 +34,13 @@ class Meal extends Component {
 
     return (
       <div className='Meal flex-box column sixth'>
-        <div className='column-title'>{`meal#${number}`}</div>
-        <div className='timeframe'>
+        <div className='meal-title'>
+          <div className='column-title'>{`meal#${number + 1}`}</div>
           {isWorkout &&
             <div className=''>Workout Meal</div>
           }
+        </div>
+        <div className='timeframe'>
           {subtitle &&
             <div className='column-subtitle'>{subtitle}</div>
           }
@@ -48,26 +50,36 @@ class Meal extends Component {
         </div>
 
         <div>
-          <div>
-            <div>{`Protein: ${amounts.protein} grams`}</div>
-          </div>
-
-          <div>
-            <div>{`Veggies: ${amounts.veggies} handfuls`}</div>
-          </div>
-
-          <div>
-            <div>{`Fat: ${amounts.fat} serving`}</div>
-          </div>
-
-          <div>
-            <div>{`Carbs: ${amounts.carbs} grams`}</div>
-          </div>
-
-          <div>
-            <div>{`Workout carbs: ${amounts.workoutCarbs} grams`}</div>
-          </div>
-
+          { amounts.protein &&
+            <div>
+              <span className='bold'>Protein: </span>
+              <span>{`${amounts.protein} ounces`}</span>
+            </div>
+          }
+          { amounts.veggies !== 0 &&
+            <div>
+              <span className='bold'>Veggies: </span>
+              <span>{`${amounts.veggies} handfuls`}</span>
+            </div>
+          }
+          { amounts.fat !== 0 &&
+            <div>
+              <span className='bold'>Fat: </span>
+              <span>{`${amounts.fat} serving`}</span>
+            </div>
+          }
+          { amounts.carbs !== 0 &&
+            <div>
+              <span className='bold'>Carbs: </span>
+              <span>{`${amounts.carbs} grams`}</span>
+            </div>
+          }
+          { amounts.workoutCarbs !== 0 &&
+            <div>
+              <span className='bold'>Workout Carbs: </span>
+              <span>{`${amounts.workoutCarbs} grams`}</span>
+            </div>
+          }
           {hourRange && time &&
             <div>
               <div className='column-subtitle'>{moment(time).format('h:mma')}</div>
@@ -80,9 +92,9 @@ class Meal extends Component {
               />
             </div>
           }
-
-          <CarbChooser amount={amounts.carbs}/>
-
+          { amounts.carbs !== 0 &&
+            <CarbChooser amount={amounts.carbs}/>
+          }
         </div>
       </div>
     );
