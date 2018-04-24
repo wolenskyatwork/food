@@ -875,7 +875,6 @@ const nonTrainingCutOne = [
   },
 ];
 // lightZeroBase, lightOneBase, lightTwoBase, lightThreeBase, lightFourBase,
-export const afterChoices = [nonTrainingCutOne, moderateOneCutOne, moderateAfterThreeCutOne];
 
 export const baseTotals = [
   {
@@ -928,6 +927,114 @@ export const baseTotals = [
     workoutCarbs: 0,
   },
 ];
+
+const lightZeroCutOne = [
+  {
+    isWorkout: true,
+    hourRange: null,
+    hours: null,
+    subtitle: '2/3 on waking, 1/3 during workout',
+    amounts: {
+      protein: '25g whey',
+      veggies: 0,
+      fat: 0,
+      carbs: 0,
+      workoutCarbs: 35,
+    },
+  },
+  {
+    isWorkout: false,
+    after: true,
+    hourRange: [.34,.34],
+    hours: {
+      after: true,
+      number: 0,
+      begin: 0.34,
+      end: 0.34,
+    },
+    subtitle: '20 minutes after workout',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 40,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    after: true,
+    hourRange: [2,4],
+    hours: {
+      after: true,
+      number: 1,
+      begin: 2,
+      end: 4,
+    },
+    subtitle: '2-4 hours after last meal',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0,
+      carbs: 35,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [3,5],
+    after: true,
+    hours: {
+      after: true,
+      number: 2,
+      begin: 3,
+      end: 5,
+    },
+    subtitle: '3-5 hours after last meal',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 15,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: [3,5],
+    after: true,
+    hours: {
+      after: true,
+      number: 3,
+      begin: 3,
+      end: 5,
+    },
+    subtitle: '3-5 hours after last meal',
+    amounts: {
+      protein: 3,
+      veggies: 2,
+      fat: 0.5,
+      carbs: 15,
+      workoutCarbs: 0,
+    },
+  },
+  {
+    isWorkout: false,
+    hourRange: null,
+    hours: null,
+    subtitle: 'bedtime',
+    amounts: {
+      protein: '25g casein',
+      veggies: 0,
+      fat: 0.5,
+      carbs: 0,
+      workoutCarbs: 0,
+    },
+  }
+];
+
+
+export const afterChoices = [nonTrainingCutOne, lightZeroCutOne, moderateOneCutOne, moderateAfterThreeCutOne];
 
 export default {
   meats,

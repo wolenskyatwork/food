@@ -4,6 +4,14 @@ import CarbChooser from './carb-chooser';
 import moment from 'moment';
 
 class Meal extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      backgroundColor: 'white',
+    };
+  }
+
   render() {
     const {
       number,
@@ -31,9 +39,14 @@ class Meal extends Component {
     if (time === null && displayTime) {
       // updateTime(number, displayTime);
     }
+    const classes = 'Meal flex-box column sixth';
+
+    const toggleColor = () => this.setState({
+      backgroundColor: 'purple',
+    });
 
     return (
-      <div className='Meal flex-box column sixth'>
+      <div className={`${classes} ${this.state.backgroundColor}`} onClick={toggleColor}>
         <div className='meal-title'>
           <div className='column-title'>{`meal#${number + 1}`}</div>
           {isWorkout &&

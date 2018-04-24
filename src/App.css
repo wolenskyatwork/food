@@ -66,6 +66,14 @@
   padding: 10px;
 }
 
+.white {
+  background-color: white;
+}
+
+.purple {
+  background-color: purple;
+}
+
 /*@keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

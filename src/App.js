@@ -77,6 +77,7 @@ class App extends Component {
       // 'light day training after three meals',
       // 'light day training after four meals',
       'non training',
+      'light day training upon waking',
       'moderate day training after one meal',
       'light day training after three meals',
     ];
