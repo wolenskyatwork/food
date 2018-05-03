@@ -1,37 +1,42 @@
-import React, { Component } from 'react';
-import TimeChooser from './time-chooser';
-import CarbChooser from './carb-chooser';
-import moment from 'moment';
+// eslint-disable-next-line no-unused-vars
+import React, { Component } from 'react'
+// eslint-disable-next-line no-unused-vars
+import TimeChooser from './time-chooser'
+// eslint-disable-next-line no-unused-vars
+import CarbChooser from './carb-chooser'
+import moment from 'moment'
 
 class Meal extends Component {
   constructor() {
-    super();
+    super()
 
     this.state = {
       backgroundColor: 'white',
-    };
+    }
   }
 
   render() {
     const {
       number,
-      meal: {
-        subtitle,
-        amounts,
-        hourRange,
-        hours,
-        isWorkout,
-      },
+      plan,
       handleTimeChange,
       time,
       times,
       updateTime,
-    } = this.props;
+    } = this.props
 
-    let displayTime;
+    const {
+      subtitle,
+      amounts,
+      hourRange,
+      hours,
+      isWorkout,
+    } = plan[number]
+
+    let displayTime
 
     if (hours && times && (hours.number || hours.number === 0) && times[hours.number]) {
-      displayTime = times[hours.number].add(hours.begin, 'hours');
+      displayTime = times[hours.number].add(hours.begin, 'hours')
     } else {
       displayTime = time
     }
@@ -39,14 +44,10 @@ class Meal extends Component {
     if (time === null && displayTime) {
       // updateTime(number, displayTime);
     }
-    const classes = 'Meal flex-box column sixth';
-
-    const toggleColor = () => this.setState({
-      backgroundColor: 'purple',
-    });
+    const classes = 'Meal flex-box column sixth'
 
     return (
-      <div className={`${classes} ${this.state.backgroundColor}`} onClick={toggleColor}>
+      <div className={`${classes} ${this.state.backgroundColor}`}>
         <div className='meal-title'>
           <div className='column-title'>{`meal#${number + 1}`}</div>
           {isWorkout &&
@@ -110,8 +111,8 @@ class Meal extends Component {
           }
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Meal;
+export default Meal

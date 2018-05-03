@@ -1,75 +1,74 @@
-import React, { Component } from 'react';
-import moment from 'moment';
-import chicken from './images/chicken.svg';
-import biker from './images/biker.svg';
-import muaythai from './images/muaythai.svg';
-import './App.css';
-import FoodColumn from './food-column';
-import Foods, { afterChoices } from './foods';
-import TimeInput from './time-input';
-import Meal from './meal';
+// eslint-disable-next-line no-unused-vars
+import React, { Component } from 'react'
+import moment from 'moment'
+import chicken from './images/chicken.svg'
+import biker from './images/biker.svg'
+import muaythai from './images/muaythai.svg'
+import './App.css'
+// eslint-disable-next-line no-unused-vars
+import FoodColumn from './food-column'
+import Foods, { afterChoices } from './foods'
+// eslint-disable-next-line no-unused-vars
+import TimeInput from './time-input'
+// eslint-disable-next-line no-unused-vars
+import Meal from './meal'
 
 class App extends Component {
   constructor() {
-    super();
+    super()
 
     this.state = {
       times: [null, null, null, null, null, null],
       after: 0,
       waking: null,
-    };
+    }
   }
 
-  getMomentFromString = (numberTime, addTime) => {
-    return moment().hour(numberTime).minute(0).second(0).add(addTime, 'h');
-  }
+  getMomentFromString = (numberTime, addTime) => moment().hour(numberTime).minute(0).second(0).add(addTime, 'h')
 
   handleChooseAfter = (event) => {
     this.setState({
       after: Number(event.target.value),
-    });
+    })
   }
 
   handleSubmitWorkout = (event) => {
     const times = this.state.times;
-    times[this.state.after] = this.getMomentFromString(event, 0);
+    times[this.state.after] = this.getMomentFromString(event, 0)
 
     times.map((time, index) => {
-      const { after } = this.state;
-      const plan = afterChoices[after][index];
+      const { after } = this.state
+      const plan = afterChoices[after][index]
       if (plan.hours && times[plan.hours.number]) {
-        return times[plan.hours.number].add(plan.hours.begin, 'hours');
+        return times[plan.hours.number].add(plan.hours.begin, 'hours')
       }
-      return time;
+      return time
     })
 
     this.setState({
       times,
-    });
+    })
   }
 
   handleSubmitWaking = (event) => {
-    this.setState({
-      waking: moment().hour(event).minute(0).second(0),
-    })
+    this.updateTime(0, moment().hour(event).minute(0).second(0))
   }
 
   updateTime = (number, time) => {
-    const times = this.state.times;
+    const times = this.state.times
 
-    times[number] = time;
+    times[number] = time
 
     this.setState({
       times,
-    });
+    })
   }
 
   render() {
     const {
       times,
       after,
-      waking,
-    } = this.state;
+    } = this.state
     const choiceTitles = [
       // 'light day first thing training',
       // 'light day training after one meal',
@@ -80,9 +79,10 @@ class App extends Component {
       'light day training upon waking',
       'moderate day training after one meal',
       'light day training after three meals',
-    ];
+    ]
 
-    const plan = afterChoices[after];
+    const plan = afterChoices[after]
+    console.log(times)
     return (
       <div className="App">
         <div className="App-header">
@@ -99,51 +99,48 @@ class App extends Component {
               </label>
               <select className='column-title' value={this.state.after} onChange={this.handleChooseAfter}>
                 {
-                  afterChoices.map((plan, i) => {
-                    return <option key={i} value={i}>{choiceTitles[i]}</option>
-                  })
+                  afterChoices.map((planChoice, i) => <option key={i} value={i}>{choiceTitles[i]}</option>)
                 }
               </select>
             </form>
           </div>
-          { /*
-          <div>
+          {<div>
             <TimeInput label='Wake up' handleSubmit={this.handleSubmitWaking} />
             <TimeInput label='Finishing workout' handleSubmit={this.handleSubmitWorkout} />
-          </div>
-          */ }
+          </div>}
           <div className='flex-box'>
             <Meal
-              time={waking}
+              time={times[0]}
               number={0}
-              meal={plan[0]}
+              plan={plan}
+              times={times}
             />
             <Meal
               times={times}
               time={times[1]}
               number={1}
-              meal={plan[1]}
+              plan={plan}
               updateTime={this.updateTime}
             />
             <Meal
               times={times}
               time={times[2]}
               number={2}
-              meal={plan[2]}
+              plan={plan}
               updateTime={this.updateTime}
             />
             <Meal
               times={times}
               time={times[3]}
               number={3}
-              meal={plan[3]}
+              plan={plan}
               updateTime={this.updateTime}
             />
             <Meal
               times={times}
               time={times[4]}
               number={4}
-              meal={plan[4]}
+              plan={plan}
               updateTime={this.updateTime}
             />
             { plan[5] &&
@@ -151,7 +148,7 @@ class App extends Component {
                 times={times}
                 time={times[5]}
                 number={5}
-                meal={plan[5]}
+                plan={plan}
                 updateTime={this.updateTime}
               />
             }
@@ -181,8 +178,8 @@ class App extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

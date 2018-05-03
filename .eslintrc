@@ -1,0 +1,60 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb-base",
+  "plugins": [
+    "flowtype"
+  ],
+  "rules": {
+    "class-methods-use-this": "off",
+    "comma-dangle": ["error", "always-multiline"],
+    "consistent-return": "off",
+    "default-case": "off",
+    "eqeqeq": "off",
+    "func-names": "off",
+    "generator-star-spacing": "off",
+    "import/extensions": "off",
+    "import/first": "off",
+    "import/named": "error",
+    "import/no-webpack-loader-syntax": "off",
+    "linebreak-style": "off",
+    "max-len": "off",
+    "new-cap": "off",
+    "no-bitwise": "off",
+    "no-cond-assign": "off",
+    "no-console": "off",
+    "no-duplicate-imports": "off",
+    "no-mixed-operators": "off",
+    "no-multiple-empty-lines": "off",
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "no-restricted-properties": "off",
+    "no-return-assign": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-expressions": [2, { allowShortCircuit: true}],
+    "no-use-before-define": "off",
+    "padded-blocks": "off",
+    "prefer-promise-reject-errors": "off",
+    "radix": "off",
+    "standard/computed-property-even-spacing": "off",
+    "semi": [2, "never"],
+    "import/prefer-default-export": "off"
+  },
+  "env": {
+    "browser": true,
+    "jest": true,
+    "jasmine": true
+  },
+  "globals": {
+    "jsdom": true
+  },
+  "settings": {
+    "import/ignore": [
+      "node_modules",
+      ".(scss|less|css|json)$",
+      ".(jpg|png|gif|eot|otf|svg|ttf|woff|woff2|mp4|webm)$"
+    ],
+    "import/resolver": {
+      "babel-module": {}
+    }
+  }
+}

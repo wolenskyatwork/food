@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
-import Foods, { carbPercentages } from './foods';
+// eslint-disable-next-line no-unused-vars
+import React, { Component } from 'react'
+import Foods, { carbPercentages } from './foods'
 
 class CarbChooser extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       carb: Foods.carbs[0],
-    };
+    }
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(event) {
     this.setState({
-      carb: event.target.value
-    });
+      carb: event.target.value,
+    })
   }
 
   render() {
@@ -27,20 +28,16 @@ class CarbChooser extends Component {
           <label>
             What carbs are you going to eat?
             <select value={this.state.value} onChange={this.handleChange}>
-              {
-                Foods.carbs.map((carb, i) => {
-                  return <option key={i} value={carb}>{carb}</option>
-                })
-              }
+              {Foods.carbs.map((eachcarb, i) => <option key={i} value={eachcarb}>{eachcarb}</option>)}
             </select>
           </label>
         </form>
         <div>
-          <div><span className='bold'>Carb Weight: </span>{(amount/carbPercentages[carb]).toFixed(3)} grams</div>
+          <div><span className='bold'>Carb Weight: </span>{(amount / carbPercentages[carb]).toFixed(3)} grams</div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default CarbChooser;
+export default CarbChooser

@@ -1,27 +1,31 @@
-import React, { Component } from 'react';
+// eslint-disable-next-line no-unused-vars
+import React, { Component } from 'react'
 
 class TimeInput extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      value: ''
-    };
+    super(props)
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value: '',
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event) {
-   this.setState({value: event.target.value});
+    this.setState({
+      value: event.target.value,
+    })
   }
 
   handleSubmit(event) {
-    event.preventDefault();
-    this.props.handleSubmit(this.state.value);
+    event.preventDefault()
+    this.props.handleSubmit(this.state.value)
   }
 
   render() {
-    const { label } = this.props;
+    const { label } = this.props
 
     return (
       <div className='input'>
@@ -33,8 +37,8 @@ class TimeInput extends Component {
           <input type='submit' value='Calculate' />
         </form>
       </div>
-    );
+    )
   }
 }
 
-export default TimeInput;
+export default TimeInput
