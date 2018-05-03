@@ -1,8 +1,5 @@
-// eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
-// eslint-disable-next-line no-unused-vars
 import TimeChooser from './time-chooser'
-// eslint-disable-next-line no-unused-vars
 import CarbChooser from './carb-chooser'
 import moment from 'moment'
 

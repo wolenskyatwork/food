@@ -1,16 +1,12 @@
-// eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
 import moment from 'moment'
 import chicken from './images/chicken.svg'
 import biker from './images/biker.svg'
 import muaythai from './images/muaythai.svg'
 import './App.css'
-// eslint-disable-next-line no-unused-vars
 import FoodColumn from './food-column'
 import Foods, { afterChoices } from './foods'
-// eslint-disable-next-line no-unused-vars
 import TimeInput from './time-input'
-// eslint-disable-next-line no-unused-vars
 import Meal from './meal'
 
 class App extends Component {
@@ -89,7 +85,6 @@ class App extends Component {
           <img src={muaythai} className="App-logo" alt="logo" />
           <img src={chicken} className="App-logo" alt="logo" />
           <img src={biker} className="App-logo" alt="logo" />
-          <h2></h2>
         </div>
         <div className='side-padding'>
           <div className='padding'>
