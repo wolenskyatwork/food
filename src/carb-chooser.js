@@ -1,8 +1,19 @@
+// @flow
+
 import React, { Component } from 'react'
 import Foods, { carbPercentages } from './foods'
 
-class CarbChooser extends Component {
-  constructor(props) {
+type Props = {
+  amount: number,
+}
+
+type State = {
+  carb: string, // Carb type? Exciting
+  value: number,
+}
+
+class CarbChooser extends Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     this.state = {
       carb: Foods.carbs[0],

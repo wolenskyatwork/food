@@ -1,8 +1,19 @@
+// @flow
+
 import React, { Component } from 'react'
 import moment from 'moment'
 
-class TimeChooser extends Component {
-  constructor(props) {
+type Props = {
+  hourRange: Array<number>,
+  time: number,
+}
+
+type State = {
+  value: any,
+}
+
+class TimeChooser extends Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     this.state = {
       value: props.hourRange[0],
@@ -11,7 +22,7 @@ class TimeChooser extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps(props: Props) {
     this.setState({
       value: props.time,
     })

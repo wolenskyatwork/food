@@ -1,6 +1,13 @@
+// @flow
+
 import React, { Component } from 'react'
 
-class FoodColumn extends Component {
+type Props = {
+  choices: Object,
+  column: string,
+}
+
+class FoodColumn extends Component<Props> {
   render() {
     const { choices, column } = this.props
 

@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react'
 import TimeChooser from './time-chooser'
 import CarbChooser from './carb-chooser'
@@ -29,7 +31,8 @@ class Meal extends Component {
       hours,
       isWorkout,
     } = plan[number]
-
+    console.log(this.props)
+    console.log(hourRange, hours, isWorkout)
     let displayTime
 
     if (hours && times && (hours.number || hours.number === 0) && times[hours.number]) {
