@@ -6,6 +6,7 @@ import moment from 'moment'
 type Props = {
   hourRange: Array<number>,
   time: number,
+  handleTimeChange: Function,
 }
 
 type State = {
@@ -18,8 +19,6 @@ class TimeChooser extends Component<Props, State> {
     this.state = {
       value: props.hourRange[0],
     }
-
-    this.handleChange = this.handleChange.bind(this)
   }
 
   componentWillReceiveProps(props: Props) {
@@ -28,7 +27,11 @@ class TimeChooser extends Component<Props, State> {
     })
   }
 
-  handleChange(event) {
+  handleSubmit() {
+    console.log('handle submit in time chooser')
+  }
+
+  handleChange(event: any) {
     const { handleTimeChange } = this.props
     this.setState({
       value: event.target.value,

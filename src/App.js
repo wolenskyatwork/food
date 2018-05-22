@@ -7,9 +7,11 @@ import biker from './images/biker.svg'
 import muaythai from './images/muaythai.svg'
 import './App.css'
 import FoodColumn from './food-column'
-import Foods, { afterChoices } from './foods'
+import Foods from './foods'
+import { baseChoices } from './cuts/base'
+
 // import TimeInput from './time-input'
-// import Meal from './meal'
+import NewMeal from './new_meal'
 
 type State = {
   times: Array<any>,
@@ -28,7 +30,17 @@ class App extends Component<*, State> {
     }
   }
 
-  getMomentFromString = (numberTime, addTime) => moment().hour(numberTime).minute(0).second(0).add(addTime, 'h')
+  handleSubmit() {
+    console.log('handle submit from app.js')
+  }
+
+  getMomentFromString(numberTime: number, addTime: number) {
+    return moment().hour(numberTime).minute(0).second(0).add(addTime, 'h')
+  }
+
+  handleChooseAfter() {
+    console.log('handle choose after')
+  }
 
   render() {
     return (
@@ -46,10 +58,14 @@ class App extends Component<*, State> {
               </label>
               <select className='column-title' value={this.state.after} onChange={this.handleChooseAfter}>
                 {
-                  afterChoices.map((planChoice, i) => <option key={i} value={i}>{choiceTitles[i]}</option>)
+                  baseChoices.map((planChoice, i) => <option key={i} value={i}>{planChoice.title}</option>)
                 }
               </select>
             </form>
+          </div>
+
+          <div>
+            <NewMeal number={0} cut={baseChoices[this.state.after]} />
           </div>
 
           <div className='category flex-box'>

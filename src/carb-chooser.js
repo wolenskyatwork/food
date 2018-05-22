@@ -17,15 +17,19 @@ class CarbChooser extends Component<Props, State> {
     super(props)
     this.state = {
       carb: Foods.carbs[0],
+      value: 0,
     }
 
-    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(event) {
+  handleChange(event: any) {
     this.setState({
       carb: event.target.value,
     })
+  }
+
+  handleSubmit(event: any) {
+    console.log('handle submit in carb chooser', event)
   }
 
   render() {

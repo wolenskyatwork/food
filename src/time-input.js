@@ -2,25 +2,31 @@
 
 import React, { Component } from 'react'
 
-class TimeInput extends Component {
-  constructor(props) {
+type Props = {
+  label: string,
+  handleSubmit: Function,
+}
+
+type State = {
+  value: string,
+}
+
+class TimeInput extends Component<Props, State> {
+  constructor(props: Props) {
     super(props)
 
     this.state = {
       value: '',
     }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange(event) {
+  handleChange(event: any) {
     this.setState({
       value: event.target.value,
     })
   }
 
-  handleSubmit(event) {
+  handleSubmit(event: any) {
     event.preventDefault()
     this.props.handleSubmit(this.state.value)
   }

@@ -5,7 +5,22 @@ import TimeChooser from './time-chooser'
 import CarbChooser from './carb-chooser'
 import moment from 'moment'
 
-class Meal extends Component {
+import type { Cut } from './cuts/types'
+
+type Props = {
+  number: number,
+  cut: Cut,
+  handleTimeChange: Function,
+  time: any,
+  times: any,
+  updateTime: Function,
+}
+
+type State = {
+  backgroundColor: 'white' | 'purple'
+}
+
+class Meal extends Component<Props, State> {
   constructor() {
     super()
 
@@ -17,11 +32,11 @@ class Meal extends Component {
   render() {
     const {
       number,
-      plan,
+      cut,
       handleTimeChange,
       time,
       times,
-      updateTime,
+      // updateTime,
     } = this.props
 
     const {
@@ -30,7 +45,7 @@ class Meal extends Component {
       hourRange,
       hours,
       isWorkout,
-    } = plan[number]
+    } = cut[number]
     console.log(this.props)
     console.log(hourRange, hours, isWorkout)
     let displayTime

@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 
 type Props = {
-  choices: Object,
+  choices: Array<string>,
   column: string,
 }
 
