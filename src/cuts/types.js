@@ -4,10 +4,17 @@ export type ChoiceArray = Array<Cut>
 
 export type Cut = {
   title: string,
-  meals: Array<Meal>,
+  meals: {
+    waking: Meal,
+    second: Meal,
+    third: Meal,
+    fourth: Meal,
+    fifth: Meal,
+    sixth?: Meal,
+  },
 }
 
-export type Meal = {
+export type Meal = {|
   isWorkout: boolean,
   hourRange: {
     start: number,
@@ -27,4 +34,5 @@ export type Meal = {
     carbs: number,
     workoutCarbs: number,
   },
-}
+  updates?: 'waking' | 'second' | 'third' | 'fourth' | 'fifth' | 'sixth',
+|}

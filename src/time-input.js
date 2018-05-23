@@ -20,13 +20,13 @@ class TimeInput extends Component<Props, State> {
     }
   }
 
-  handleChange(event: any) {
+  handleChange = (event: any) => {
     this.setState({
       value: event.target.value,
     })
   }
 
-  handleSubmit(event: any) {
+  handleSubmit = (event: any) => {
     event.preventDefault()
     this.props.handleSubmit(this.state.value)
   }

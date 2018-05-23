@@ -28,7 +28,9 @@ class NewMeal extends Component<Props, State> {
       cut,
       number,
     } = this.props
+    console.log(cut, number)
 
+    if (!cut.meals[number]) return null
     const {
       subtitle,
       amounts,

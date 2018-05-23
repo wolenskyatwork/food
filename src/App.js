@@ -10,12 +10,12 @@ import FoodColumn from './food-column'
 import Foods from './foods'
 import { baseChoices } from './cuts/base'
 
-// import TimeInput from './time-input'
+import TimeInput from './time-input'
 import NewMeal from './new_meal'
 
 type State = {
   times: Array<any>,
-  after: number,
+  dailyTrainingPlan: number,
   waking: ?Object,
 }
 
@@ -25,24 +25,29 @@ class App extends Component<*, State> {
 
     this.state = {
       times: [null, null, null, null, null, null],
-      after: 0,
+      dailyTrainingPlan: 0,
       waking: null,
     }
-  }
-
-  handleSubmit() {
-    console.log('handle submit from app.js')
   }
 
   getMomentFromString(numberTime: number, addTime: number) {
     return moment().hour(numberTime).minute(0).second(0).add(addTime, 'h')
   }
 
-  handleChooseAfter() {
-    console.log('handle choose after')
+  handleChooseDailyTrainingPlan = (event: any) => {
+    this.setState({
+      dailyTrainingPlan: event.target.value,
+    })
+  }
+
+  handleWakingTimeSubmit = (time: any) => {
+    this.setState({
+      waking: this.getMomentFromString(time, 0),
+    })
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className="App">
         <div className="App-header">
@@ -52,11 +57,11 @@ class App extends Component<*, State> {
         </div>
         <div className='side-padding'>
           <div className='padding'>
-            <form onSubmit={this.handleSubmit}>
+            <form>
               <label className='column-title'>
-                {'After how many meals will your workout be? '}
+                {'What is your training plan for today?'}
               </label>
-              <select className='column-title' value={this.state.after} onChange={this.handleChooseAfter}>
+              <select className='column-title' value={this.state.dailyTrainingPlan} onChange={this.handleChooseDailyTrainingPlan}>
                 {
                   baseChoices.map((planChoice, i) => <option key={i} value={i}>{planChoice.title}</option>)
                 }
@@ -65,7 +70,17 @@ class App extends Component<*, State> {
           </div>
 
           <div>
-            <NewMeal number={0} cut={baseChoices[this.state.after]} />
+            <div>When will you wake up?</div>
+            <TimeInput label={'waking time'} handleSubmit={this.handleWakingTimeSubmit} />
+          </div>
+
+          <div>
+            <NewMeal number={0} cut={baseChoices[this.state.dailyTrainingPlan]} />
+            <NewMeal number={1} cut={baseChoices[this.state.dailyTrainingPlan]} />
+            <NewMeal number={2} cut={baseChoices[this.state.dailyTrainingPlan]} />
+            <NewMeal number={3} cut={baseChoices[this.state.dailyTrainingPlan]} />
+            <NewMeal number={4} cut={baseChoices[this.state.dailyTrainingPlan]} />
+            <NewMeal number={5} cut={baseChoices[this.state.dailyTrainingPlan]} />
           </div>
 
           <div className='category flex-box'>

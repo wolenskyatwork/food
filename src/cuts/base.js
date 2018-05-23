@@ -56,9 +56,9 @@ export const baseTotals = [
 ]
 
 const nonTrainingBase: Cut = {
-  title: 'non training day on base',
-  meals: [
-    {
+  title: 'non training day',
+  meals: {
+    waking: {
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -73,8 +73,9 @@ const nonTrainingBase: Cut = {
         carbs: 0,
         workoutCarbs: 0,
       },
+      updates: 'second',
     },
-    {
+    second: {
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -90,7 +91,7 @@ const nonTrainingBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    third: {
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -106,7 +107,7 @@ const nonTrainingBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fourth: {
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -122,7 +123,7 @@ const nonTrainingBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fifth: {
       isWorkout: false,
       hours: null,
       hourRange: {
@@ -138,13 +139,13 @@ const nonTrainingBase: Cut = {
         workoutCarbs: 0,
       },
     },
-  ],
+  },
 }
 
 const lightZeroBase: Cut = {
-  title: 'light training after zero meals (upon waking) BASE',
-  meals: [
-    {
+  title: 'light training after zero meals (upon waking)',
+  meals: {
+    waking: {
       isWorkout: true,
       hourRange: {
         start: 0,
@@ -160,9 +161,8 @@ const lightZeroBase: Cut = {
         workoutCarbs: 35,
       },
     },
-    {
+    second: {
       isWorkout: false,
-      after: true,
       hourRange: {
         start: 0.34,
         end: 0.34,
@@ -182,9 +182,8 @@ const lightZeroBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    third: {
       isWorkout: false,
-      after: true,
       hourRange: {
         start: 2,
         end: 4,
@@ -204,13 +203,12 @@ const lightZeroBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fourth: {
       isWorkout: false,
       hourRange: {
         start: 3,
         end: 5,
       },
-      after: true,
       hours: {
         after: true,
         number: 2,
@@ -226,13 +224,12 @@ const lightZeroBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fifth: {
       isWorkout: false,
       hourRange: {
         start: 3,
         end: 5,
       },
-      after: true,
       hours: {
         after: true,
         number: 3,
@@ -248,7 +245,7 @@ const lightZeroBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    sixth: {
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -264,13 +261,13 @@ const lightZeroBase: Cut = {
         workoutCarbs: 0,
       },
     },
-  ],
+  },
 }
 
 const lightOneBase: Cut = {
-  title: 'light training day after one meal (base cut)',
-  meals: [
-    {
+  title: 'light training day after one meal',
+  meals: {
+    waking: {
       isWorkout: false,
       hourRange: {
         start: 1,
@@ -282,7 +279,6 @@ const lightOneBase: Cut = {
         begin: 1,
         end: 3,
       },
-      after: false,
       subtitle: '1-3 hours before workout',
       amounts: {
         protein: 3,
@@ -292,9 +288,8 @@ const lightOneBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    second: {
       isWorkout: true,
-      after: true,
       hourRange: {
         start: 0,
         end: 0,
@@ -309,9 +304,8 @@ const lightOneBase: Cut = {
         workoutCarbs: 15,
       },
     },
-    {
+    third: {
       isWorkout: false,
-      after: true,
       hourRange: {
         start: 0.666,
         end: 0.666,
@@ -331,13 +325,12 @@ const lightOneBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fourth: {
       isWorkout: false,
       hourRange: {
         start: 2,
         end: 4,
       },
-      after: true,
       hours: {
         after: true,
         number: 3,
@@ -353,13 +346,12 @@ const lightOneBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fifth: {
       isWorkout: false,
       hourRange: {
         start: 3,
         end: 5,
       },
-      after: true,
       hours: {
         after: true,
         number: 4,
@@ -375,7 +367,7 @@ const lightOneBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    sixth: {
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -391,13 +383,13 @@ const lightOneBase: Cut = {
         workoutCarbs: 0,
       },
     },
-  ],
+  },
 }
 
 const lightFourBase: Cut = {
-  title: 'light training day after four meals (BASE)',
-  meals: [
-    {
+  title: 'light training day after four meals',
+  meals: {
+    waking: {
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -413,7 +405,7 @@ const lightFourBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    second: {
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -429,7 +421,7 @@ const lightFourBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    third: {
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -445,7 +437,7 @@ const lightFourBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fourth: {
       isWorkout: false,
       hourRange: {
         start: 1,
@@ -461,7 +453,7 @@ const lightFourBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fifth: {
       isWorkout: true,
       hourRange: {
         start: 0,
@@ -477,7 +469,7 @@ const lightFourBase: Cut = {
         workoutCarbs: 15,
       },
     },
-    {
+    sixth: {
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -493,13 +485,13 @@ const lightFourBase: Cut = {
         workoutCarbs: 0,
       },
     },
-  ],
+  },
 }
 
 const lightTwoBase: Cut = {
-  title: 'light workout after two meals (base)',
-  meals: [
-    {
+  title: 'light workout after two meals',
+  meals: {
+    waking: {
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -515,9 +507,8 @@ const lightTwoBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    second: {
       isWorkout: false,
-      after: false,
       hourRange: {
         start: 1,
         end: 3,
@@ -537,9 +528,8 @@ const lightTwoBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    third: {
       isWorkout: true,
-      after: true,
       hourRange: {
         start: 0,
         end: 0,
@@ -554,13 +544,12 @@ const lightTwoBase: Cut = {
         workoutCarbs: 15,
       },
     },
-    {
+    fourth: {
       isWorkout: false,
       hourRange: {
         start: 0.6666,
         end: 0.6666,
       },
-      after: true,
       hours: {
         after: true,
         number: 3,
@@ -576,13 +565,12 @@ const lightTwoBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fifth: {
       isWorkout: false,
       hourRange: {
         start: 2,
         end: 4,
       },
-      after: true,
       hours: {
         after: true,
         number: 4,
@@ -598,7 +586,7 @@ const lightTwoBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    sixth: {
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -614,13 +602,13 @@ const lightTwoBase: Cut = {
         workoutCarbs: 0,
       },
     },
-  ],
+  },
 }
 
 const lightThreeBase: Cut = {
-  title: 'light workout after three meals (base)',
-  meals: [
-    {
+  title: 'light workout after three meals',
+  meals: {
+    waking: {
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -636,9 +624,7 @@ const lightThreeBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
-      isWorkout: false,
-      after: true,
+    second: {
       hourRange: {
         start: 3,
         end: 5,
@@ -649,6 +635,7 @@ const lightThreeBase: Cut = {
         begin: 3,
         end: 5,
       },
+      isWorkout: false,
       subtitle: '3-5 hours after last meal',
       amounts: {
         protein: 3,
@@ -658,9 +645,8 @@ const lightThreeBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    third: {
       isWorkout: false,
-      after: false,
       hourRange: {
         start: 1,
         end: 3,
@@ -680,13 +666,12 @@ const lightThreeBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fourth: {
       isWorkout: true,
       hourRange: {
         start: 0,
         end: 0,
       },
-      after: true,
       hours: null,
       subtitle: '1/2 shake during workout, 1/2 right after',
       amounts: {
@@ -697,13 +682,12 @@ const lightThreeBase: Cut = {
         workoutCarbs: 15,
       },
     },
-    {
+    fifth: {
       isWorkout: false,
       hourRange: {
         start: 0.6666,
         end: 0.6666,
       },
-      after: true,
       hours: {
         after: true,
         number: 4,
@@ -719,7 +703,7 @@ const lightThreeBase: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    sixth: {
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -735,7 +719,7 @@ const lightThreeBase: Cut = {
         workoutCarbs: 0,
       },
     },
-  ],
+  },
 }
 
 export const baseChoices: ChoiceArray = [nonTrainingBase, lightZeroBase, lightOneBase, lightTwoBase, lightThreeBase, lightFourBase]
