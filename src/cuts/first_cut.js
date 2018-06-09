@@ -1,5 +1,3 @@
-// @flow
-
 import type { Cut, ChoiceArray } from './types'
 
 const moderateOneCutOne: Cut = {
@@ -343,8 +341,8 @@ const nonTrainingCutOne: Cut = {
 
 const lightZeroCutOne: Cut = {
   title: 'light training day after zero meals (cut one)',
-  meals: [
-    {
+  meals: {
+    waking: {
       isWorkout: true,
       hourRange: {
         start: 0,
@@ -360,7 +358,7 @@ const lightZeroCutOne: Cut = {
         workoutCarbs: 35,
       },
     },
-    {
+    second: {
       isWorkout: false,
       after: true,
       hourRange: {
@@ -382,7 +380,7 @@ const lightZeroCutOne: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    third: {
       isWorkout: false,
       after: true,
       hourRange: {
@@ -404,7 +402,7 @@ const lightZeroCutOne: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fourth: {
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -426,7 +424,7 @@ const lightZeroCutOne: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    fifth: {
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -448,7 +446,7 @@ const lightZeroCutOne: Cut = {
         workoutCarbs: 0,
       },
     },
-    {
+    sixth: {
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -464,7 +462,7 @@ const lightZeroCutOne: Cut = {
         workoutCarbs: 0,
       },
     },
-  ],
+  },
 }
 
 export const afterChoices: ChoiceArray = [nonTrainingCutOne, lightZeroCutOne, moderateOneCutOne, moderateAfterThreeCutOne]

@@ -9,45 +9,78 @@ import './App.css'
 import FoodColumn from './food-column'
 import Foods from './foods'
 import { baseChoices } from './cuts/base'
+import type { MealKeys } from './cuts/types'
+
+import { getNewNonTraining } from './cuts/base/non_training/index.js'
 
 import TimeInput from './time-input'
 import NewMeal from './new_meal'
 
+type TimeHash = {
+  waking: ?Moment,
+  second: ?Moment,
+  third: ?Moment,
+  fourth: ?Moment,
+  fifth: ?Moment,
+  sixth: ?Moment,
+}
+
 type State = {
-  times: Array<any>,
+  times: TimeHash,
   dailyTrainingPlan: number,
-  waking: ?Object,
 }
 
 class App extends Component<*, State> {
+  dailyTrainingPlan: any
+
   constructor() {
     super()
-
+    this.dailyTrainingPlan = getNewNonTraining()
     this.state = {
-      times: [null, null, null, null, null, null],
       dailyTrainingPlan: 0,
-      waking: null,
+      times: {
+        waking: null,
+        second: null,
+        third: null,
+        fourth: null,
+        fifth: null,
+        sixth: null,
+      },
     }
   }
+  //
+  // componentWillUpdate(newProps: any, newState: State) {
+  //
+  // }
 
   getMomentFromString(numberTime: number, addTime: number) {
     return moment().hour(numberTime).minute(0).second(0).add(addTime, 'h')
   }
 
+  /* eslint-disable no-undef */
   handleChooseDailyTrainingPlan = (event: any) => {
     this.setState({
       dailyTrainingPlan: event.target.value,
     })
   }
 
+  /* eslint-disable no-undef */
+  updateTimes = (mealKey: MealKeys, time: Moment): TimeHash => {
+    console.log(mealKey, time)
+  }
+
   handleWakingTimeSubmit = (time: any) => {
+    const times = this.updateTimes('waking', time)
+
     this.setState({
-      waking: this.getMomentFromString(time, 0),
+      times,
     })
   }
 
   render() {
-    console.log(this.state)
+    // const dailyTrainingPlan = baseChoices[this.state.dailyTrainingPlan]
+    const dailyTrainingPlan = this.dailyTrainingPlan
+    console.log(dailyTrainingPlan, 'sldfkjsldkfjsdlkfjsldfslkfj')
     return (
       <div className="App">
         <div className="App-header">
@@ -75,12 +108,12 @@ class App extends Component<*, State> {
           </div>
 
           <div>
-            <NewMeal number={0} cut={baseChoices[this.state.dailyTrainingPlan]} />
-            <NewMeal number={1} cut={baseChoices[this.state.dailyTrainingPlan]} />
-            <NewMeal number={2} cut={baseChoices[this.state.dailyTrainingPlan]} />
-            <NewMeal number={3} cut={baseChoices[this.state.dailyTrainingPlan]} />
-            <NewMeal number={4} cut={baseChoices[this.state.dailyTrainingPlan]} />
-            <NewMeal number={5} cut={baseChoices[this.state.dailyTrainingPlan]} />
+            <NewMeal node={dailyTrainingPlan.head} />
+            <NewMeal node={dailyTrainingPlan.head.next} />
+            <NewMeal node={dailyTrainingPlan.head.next.next} />
+            <NewMeal node={dailyTrainingPlan.head.next.next.next} />
+            <NewMeal node={dailyTrainingPlan.head.next.next.next.next} />
+            <NewMeal node={dailyTrainingPlan.head.next.next.next.next.next} />
           </div>
 
           <div className='category flex-box'>

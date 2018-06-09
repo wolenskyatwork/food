@@ -3,15 +3,21 @@
 import React, { Component } from 'react'
 import CarbChooser from './carb-chooser'
 
-import type { Cut } from './cuts/types'
-
 type Props = {
-  number: number,
-  cut: Cut,
+  node: ?Node,
 }
 
 type State = {
-  backgroundColor: 'white' | 'purple'
+  backgroundColor: 'white' | 'purple',
+}
+
+// import me
+type Amounts = {
+  protein: number,
+  veggies: number,
+  fat: number,
+  carbs: number,
+  workoutCarbs: number,
 }
 
 class NewMeal extends Component<Props, State> {
@@ -24,37 +30,25 @@ class NewMeal extends Component<Props, State> {
   }
 
   render() {
-    const {
-      cut,
-      number,
-    } = this.props
-    console.log(cut, number)
+    const { node } = this.props
 
-    if (!cut.meals[number]) return null
-    const {
-      subtitle,
-      amounts,
-      // hourRange,
-      isWorkout,
-    } = cut.meals[number]
-
+    if (!node) {
+      return <div>This meal isnt set up yet</div>
+    }
+    const amounts: Amounts = node.getAmounts()
     const classes = 'Meal flex-box column sixth'
 
     return (
       <div className={`${classes} ${this.state.backgroundColor}`}>
         <div className='meal-title'>
-          <div className='column-title'>{`meal#${number + 1}`}</div>
-          {isWorkout &&
+          <div className='column-title'>{node.getName()} meal</div>
+          {node.getIsWorkout() &&
             <div className=''>Workout Meal</div>
           }
         </div>
         <div className='timeframe'>
-          {subtitle &&
-            <div className='column-subtitle'>{subtitle}</div>
-          }
-          {/* displayTime &&
-            <div className='column-subtitle'>{moment(displayTime).format('h:mma')}</div>
-          */}
+          <div className='column-subtitle'>{node.getSubtitle()}</div>
+          <div className='column-subtitle'>{node.getMealTimeAsString()}</div>
         </div>
 
         <div>

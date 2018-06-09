@@ -1,6 +1,15 @@
 // @flow
 
 export type ChoiceArray = Array<Cut>
+export type MealKeys = 'none' | 'waking' | 'second' | 'third' | 'fourth' | 'fifth' | 'sixth'
+
+export type Amounts = {
+  protein: number,
+  veggies: number,
+  fat: number,
+  carbs: number,
+  workoutCarbs: number,
+}
 
 export type Cut = {
   title: string,
@@ -27,12 +36,6 @@ export type Meal = {|
     end: number,
   },
   subtitle: string,
-  amounts: {
-    protein: number,
-    veggies: number,
-    fat: number,
-    carbs: number,
-    workoutCarbs: number,
-  },
-  updates?: 'waking' | 'second' | 'third' | 'fourth' | 'fifth' | 'sixth',
+  amounts: Amounts,
+  updates: Array<MealKeys>,
 |}

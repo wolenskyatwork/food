@@ -73,7 +73,7 @@ const nonTrainingBase: Cut = {
         carbs: 0,
         workoutCarbs: 0,
       },
-      updates: 'second',
+      updates: ['second'],
     },
     second: {
       isWorkout: false,
@@ -90,6 +90,7 @@ const nonTrainingBase: Cut = {
         carbs: 0,
         workoutCarbs: 0,
       },
+      updates: ['third'],
     },
     third: {
       isWorkout: false,
@@ -106,6 +107,7 @@ const nonTrainingBase: Cut = {
         carbs: 20,
         workoutCarbs: 0,
       },
+      updates: ['fourth'],
     },
     fourth: {
       isWorkout: false,
@@ -122,6 +124,7 @@ const nonTrainingBase: Cut = {
         carbs: 25,
         workoutCarbs: 0,
       },
+      updates: ['none'],
     },
     fifth: {
       isWorkout: false,
@@ -138,6 +141,7 @@ const nonTrainingBase: Cut = {
         carbs: 25,
         workoutCarbs: 0,
       },
+      updates: ['none'],
     },
   },
 }
@@ -146,6 +150,7 @@ const lightZeroBase: Cut = {
   title: 'light training after zero meals (upon waking)',
   meals: {
     waking: {
+      updates: ['second'],
       isWorkout: true,
       hourRange: {
         start: 0,
@@ -162,6 +167,7 @@ const lightZeroBase: Cut = {
       },
     },
     second: {
+      updates: ['third'],
       isWorkout: false,
       hourRange: {
         start: 0.34,
@@ -183,6 +189,7 @@ const lightZeroBase: Cut = {
       },
     },
     third: {
+      updates: ['fourth'],
       isWorkout: false,
       hourRange: {
         start: 2,
@@ -204,6 +211,7 @@ const lightZeroBase: Cut = {
       },
     },
     fourth: {
+      updates: ['fifth'],
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -225,6 +233,7 @@ const lightZeroBase: Cut = {
       },
     },
     fifth: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -246,6 +255,7 @@ const lightZeroBase: Cut = {
       },
     },
     sixth: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -268,6 +278,7 @@ const lightOneBase: Cut = {
   title: 'light training day after one meal',
   meals: {
     waking: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 1,
@@ -289,6 +300,7 @@ const lightOneBase: Cut = {
       },
     },
     second: {
+      updates: ['waking', 'third'],
       isWorkout: true,
       hourRange: {
         start: 0,
@@ -305,6 +317,7 @@ const lightOneBase: Cut = {
       },
     },
     third: {
+      updates: ['fourth'],
       isWorkout: false,
       hourRange: {
         start: 0.666,
@@ -326,6 +339,7 @@ const lightOneBase: Cut = {
       },
     },
     fourth: {
+      updates: ['fifth'],
       isWorkout: false,
       hourRange: {
         start: 2,
@@ -347,6 +361,7 @@ const lightOneBase: Cut = {
       },
     },
     fifth: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -368,6 +383,7 @@ const lightOneBase: Cut = {
       },
     },
     sixth: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -390,6 +406,7 @@ const lightFourBase: Cut = {
   title: 'light training day after four meals',
   meals: {
     waking: {
+      updates: ['second'],
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -406,6 +423,7 @@ const lightFourBase: Cut = {
       },
     },
     second: {
+      updates: ['third'],
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -422,6 +440,7 @@ const lightFourBase: Cut = {
       },
     },
     third: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 3,
@@ -438,6 +457,7 @@ const lightFourBase: Cut = {
       },
     },
     fourth: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 1,
@@ -454,6 +474,7 @@ const lightFourBase: Cut = {
       },
     },
     fifth: {
+      updates: ['fourth'],
       isWorkout: true,
       hourRange: {
         start: 0,
@@ -470,6 +491,7 @@ const lightFourBase: Cut = {
       },
     },
     sixth: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -492,6 +514,7 @@ const lightTwoBase: Cut = {
   title: 'light workout after two meals',
   meals: {
     waking: {
+      updates: ['second'],
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -508,6 +531,7 @@ const lightTwoBase: Cut = {
       },
     },
     second: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 1,
@@ -529,6 +553,7 @@ const lightTwoBase: Cut = {
       },
     },
     third: {
+      updates: ['second', 'fourth'],
       isWorkout: true,
       hourRange: {
         start: 0,
@@ -545,6 +570,7 @@ const lightTwoBase: Cut = {
       },
     },
     fourth: {
+      updates: ['fifth'],
       isWorkout: false,
       hourRange: {
         start: 0.6666,
@@ -566,6 +592,7 @@ const lightTwoBase: Cut = {
       },
     },
     fifth: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 2,
@@ -587,6 +614,7 @@ const lightTwoBase: Cut = {
       },
     },
     sixth: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -609,6 +637,7 @@ const lightThreeBase: Cut = {
   title: 'light workout after three meals',
   meals: {
     waking: {
+      updates: ['second'],
       isWorkout: false,
       hourRange: {
         start: 0,
@@ -625,6 +654,7 @@ const lightThreeBase: Cut = {
       },
     },
     second: {
+      updates: ['third'],
       hourRange: {
         start: 3,
         end: 5,
@@ -646,6 +676,7 @@ const lightThreeBase: Cut = {
       },
     },
     third: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 1,
@@ -667,6 +698,7 @@ const lightThreeBase: Cut = {
       },
     },
     fourth: {
+      updates: ['third', 'fifth'],
       isWorkout: true,
       hourRange: {
         start: 0,
@@ -683,6 +715,7 @@ const lightThreeBase: Cut = {
       },
     },
     fifth: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 0.6666,
@@ -704,6 +737,7 @@ const lightThreeBase: Cut = {
       },
     },
     sixth: {
+      updates: ['none'],
       isWorkout: false,
       hourRange: {
         start: 0,
