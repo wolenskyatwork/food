@@ -1,6 +1,9 @@
 // @flow
 
 import React, { Component } from 'react'
+import moment from 'moment'
+
+import TimeInput from './time-input'
 import CarbChooser from './carb-chooser'
 
 type Props = {
@@ -29,6 +32,15 @@ class NewMeal extends Component<Props, State> {
     }
   }
 
+  handleMealTimeSubmit = (input: any) => {
+    const { node } = this.props
+
+    if (node) {
+      const time = moment({ hour: input })
+      node.setMealTime(time)
+    }
+  }
+
   render() {
     const { node } = this.props
 
@@ -49,6 +61,11 @@ class NewMeal extends Component<Props, State> {
         <div className='timeframe'>
           <div className='column-subtitle'>{node.getSubtitle()}</div>
           <div className='column-subtitle'>{node.getMealTimeAsString()}</div>
+        </div>
+
+        <div>
+          <div>When will you actually eat this meal or finish this workout?</div>
+          <TimeInput label={'time'} handleSubmit={this.handleMealTimeSubmit} />
         </div>
 
         <div>

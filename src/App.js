@@ -8,50 +8,50 @@ import muaythai from './images/muaythai.svg'
 import './App.css'
 import FoodColumn from './food-column'
 import Foods from './foods'
-import { baseChoices } from './cuts/base'
-import type { MealKeys } from './cuts/types'
+// import { baseChoices } from './cuts/base'
+// import type { MealKeys } from './cuts/types'
 
-import { getNewNonTraining } from './cuts/base/non_training/index.js'
+import { getNewNonTraining } from './cuts/base/non_training.js'
+import {getNewLightFirstThingTraining} from './cuts/base/light/first_thing.js'
+import { LinkedList } from './classes/linked_list'
 
 import TimeInput from './time-input'
 import NewMeal from './new_meal'
 
-type TimeHash = {
-  waking: ?Moment,
-  second: ?Moment,
-  third: ?Moment,
-  fourth: ?Moment,
-  fifth: ?Moment,
-  sixth: ?Moment,
-}
-
 type State = {
-  times: TimeHash,
-  dailyTrainingPlan: number,
+  dailyTrainingPlan: LinkedList,
+  waking: string,
+  first: ?string,
+  second: ?string,
+  third: ?string,
+  fourth: ?string,
+  fifth: ?string,
+  sixth: ?string,
 }
 
 class App extends Component<*, State> {
-  dailyTrainingPlan: any
+  baseTrainingPlans: Array<LinkedList>
 
   constructor() {
     super()
-    this.dailyTrainingPlan = getNewNonTraining()
+
+    // I can take this and make it somewhere else
+    this.baseTrainingPlans = [
+      getNewNonTraining(this.handleNewMealTime),
+      getNewLightFirstThingTraining(this.handleNewMealTime),
+    ]
+
     this.state = {
-      dailyTrainingPlan: 0,
-      times: {
-        waking: null,
-        second: null,
-        third: null,
-        fourth: null,
-        fifth: null,
-        sixth: null,
-      },
+      dailyTrainingPlan: this.baseTrainingPlans[0],
+      waking: '',
+      first: null,
+      second: null,
+      third: null,
+      fourth: null,
+      fifth: null,
+      sixth: null,
     }
   }
-  //
-  // componentWillUpdate(newProps: any, newState: State) {
-  //
-  // }
 
   getMomentFromString(numberTime: number, addTime: number) {
     return moment().hour(numberTime).minute(0).second(0).add(addTime, 'h')
@@ -60,27 +60,27 @@ class App extends Component<*, State> {
   /* eslint-disable no-undef */
   handleChooseDailyTrainingPlan = (event: any) => {
     this.setState({
-      dailyTrainingPlan: event.target.value,
+      dailyTrainingPlan: this.baseTrainingPlans[event.target.value],
     })
   }
 
-  /* eslint-disable no-undef */
-  updateTimes = (mealKey: MealKeys, time: Moment): TimeHash => {
-    console.log(mealKey, time)
-  }
-
-  handleWakingTimeSubmit = (time: any) => {
-    const times = this.updateTimes('waking', time)
+  handleWakingTimeSubmit = (input: any) => {
+    this.state.dailyTrainingPlan.setMealTimeByName('first', moment({ hour: input, minute: 5 }))
 
     this.setState({
-      times,
+      waking: input,
+    })
+  }
+
+  handleNewMealTime = (name: string, time: string) => {
+    this.setState({
+      [name]: time,
     })
   }
 
   render() {
-    // const dailyTrainingPlan = baseChoices[this.state.dailyTrainingPlan]
-    const dailyTrainingPlan = this.dailyTrainingPlan
-    console.log(dailyTrainingPlan, 'sldfkjsldkfjsdlkfjsldfslkfj')
+    const { dailyTrainingPlan } = this.state
+    console.log(dailyTrainingPlan)
     return (
       <div className="App">
         <div className="App-header">
@@ -96,7 +96,7 @@ class App extends Component<*, State> {
               </label>
               <select className='column-title' value={this.state.dailyTrainingPlan} onChange={this.handleChooseDailyTrainingPlan}>
                 {
-                  baseChoices.map((planChoice, i) => <option key={i} value={i}>{planChoice.title}</option>)
+                  this.baseTrainingPlans.map((linkedList, i) => <option key={i} value={i}>{linkedList.title}</option>)
                 }
               </select>
             </form>

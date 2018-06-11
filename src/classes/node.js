@@ -6,8 +6,25 @@ type Range = {
   latest: ?number,
 }
 
-export const emptyRange: Range = { earliest: null, latest: null }
-export const threeFiveRange: Range = { earliest: 3, latest: 5 }
+const emptyRange: Range = { earliest: null, latest: null }
+const threeFiveRange: Range = { earliest: 3, latest: 5 }
+const twoFourRange: Range = { earliest: 2, latest: 4 }
+const twentyMinRange: Range = { earliest: 0.33, latest: 0.33 }
+
+export const ranges: { [string]: Range } = {
+  emptyRange,
+  threeFiveRange,
+  twentyMinRange,
+  twoFourRange,
+}
+
+type NodeConfig = {
+  name: string,
+  range: Range,
+  isWorkout: boolean,
+  amounts: Amounts,
+  subtitle: string,
+}
 
 export class Node {
   next: Node
@@ -20,20 +37,29 @@ export class Node {
   isWorkout: boolean
   subtitle: string
   amounts: Amounts
+  newMealCallback: (string, string) => void
 
-  constructor(name: string, range: Range, isWorkout: boolean, amounts: Amounts, subtitle: string) {
+  constructor(nodeConfig: NodeConfig, newMealCallback: (string, string) => void) {
+    const {
+      name,
+      range,
+      isWorkout,
+      amounts,
+      subtitle,
+    } = nodeConfig
+
     this.name = name
     this.range = range
     this.isWorkout = isWorkout
     this.amounts = amounts
     this.subtitle = subtitle
+    this.newMealCallback = newMealCallback
   }
 
   setMealTime(time: Moment) {
     this.mealTime = time
     console.log(time.format("h:mm a"))
-    console.log(this.mealTime.format("h:mm a"))
-
+    this.newMealCallback(this.getName(), this.getMealTimeAsString())
     // this.prev && this.prev.getUpdateFromNext(time)
     this.next && this.next.getUpdateFromPrev(time)
   }
@@ -41,7 +67,7 @@ export class Node {
   // called on 'next' with new meal time to trigger updates
   getUpdateFromPrev(prevTime: Moment) {
     this.startTime = moment(prevTime).add(this.range.earliest, 'hours')
-    if (!this.mealTime) {
+    if (!this.mealTime || this.mealTime !== this.startTime) {
       this.setMealTime(this.startTime)
     }
   }
@@ -72,7 +98,7 @@ export class Node {
   }
 
   getMealTimeAsString(): string {
-    return this.getMealTime().format('h:mm a')
+    return this.getMealTime() ? this.getMealTime().format('h:mm a') : 'not set yet'
   }
 
   setNext(node: Node) {

@@ -7,9 +7,11 @@ export class LinkedList {
   head: ?Node
   last: ?Node
   nodes: Object // @TODO I think there is a better way to type this
+  title: string
 
-  constructor() {
+  constructor(title: string) {
     this.nodes = {}
+    this.title = title
   }
 
   setMealTimeByName(name: string, time: Moment) {
