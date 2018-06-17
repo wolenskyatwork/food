@@ -3,39 +3,25 @@
 import { Node, ranges, UPDATES } from '../../../classes/node'
 import { LinkedList } from '../../../classes/linked_list'
 
-export function getNewLightFirstThingTraining(newMealCallback: Function)  {
+export function getNewLightAfterTwoTraining(newMealCallback: Function)  {
   const meals = [
     {
       name: 'first',
       range: ranges.emptyRange,
-      isWorkout: true,
-      amounts: {
-        protein: 25,
-        veggies: 0,
-        fat: 0,
-        carbs: 0,
-        workoutCarbs: 35,
-      },
-      subtitle: 'Drink 2/3 of workout shake upon waking, 1/3 during workout',
-      updates: UPDATES.NONE,
-    },
-    {
-      name: 'second',
-      range: ranges.twentyMinRange,
       isWorkout: false,
       amounts: {
         protein: 3,
         veggies: 2,
         fat: 0.5,
-        carbs: 40,
+        carbs: 0,
         workoutCarbs: 0,
       },
-      subtitle: '20 minutes after workout is over',
-      updates: UPDATES.PREV,
+      subtitle: 'waking',
+      updates: UPDATES.NONE,
     },
     {
-      name: 'third',
-      range: ranges.twoFourRange,
+      name: 'second',
+      range: ranges.oneThreeRange,
       isWorkout: false,
       amounts: {
         protein: 3,
@@ -44,36 +30,50 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
         carbs: 35,
         workoutCarbs: 0,
       },
-      subtitle: '2-4 hours after last meal',
-      updates: UPDATES.PREV,
+      subtitle: '1-3 hours before workout',
+      updates: UPDATES.NONE,
+    },
+    {
+      name: 'third',
+      range: ranges.emptyRange,
+      isWorkout: true,
+      amounts: {
+        protein: 25,
+        veggies: 0,
+        fat: 0,
+        carbs: 0,
+        workoutCarbs: 15,
+      },
+      subtitle: 'Drink 1/2 shake during workout, 1/2 right after',
+      updates: UPDATES.BOTH,
     },
     {
       name: 'fourth',
-      range: ranges.threeFiveRange,
+      range: ranges.fortyMinuteRange,
       isWorkout: false,
       amounts: {
         protein: 3,
         veggies: 2,
         fat: 0.5,
-        carbs: 15,
+        carbs: 40,
         workoutCarbs: 0,
       },
-      subtitle: '3-5 hours after last meal',
-      updates: UPDATES.PREV,
+      subtitle: '40 minutes after workout is over',
+      updates: UPDATES.NEXT,
     },
     {
       name: 'fifth',
-      range: ranges.threeFiveRange,
+      range: ranges.twoFourRange,
       isWorkout: false,
       amounts: {
         protein: 3,
         veggies: 2,
         fat: 1,
-        carbs: 15,
+        carbs: 35,
         workoutCarbs: 0,
       },
-      subtitle: '3-5 hours after last meal',
-      updates: UPDATES.PREV,
+      subtitle: '2-4 hours after last meal',
+      updates: UPDATES.NEXT,
     },
     {
       name: 'sixth',
@@ -83,7 +83,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
         protein: 25,
         veggies: 0,
         fat: 1,
-        carbs: 0,
+        carbs: 15,
         workoutCarbs: 0,
       },
       subtitle: 'bedtime',
@@ -91,7 +91,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
     },
   ]
 
-  const linkedList = new LinkedList('base light first thing')
+  const linkedList = new LinkedList('base light after two meals')
 
   meals.forEach((meal) => linkedList.push(new Node(meal, newMealCallback)))
 

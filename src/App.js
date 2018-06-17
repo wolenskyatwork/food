@@ -11,15 +11,18 @@ import Foods from './foods'
 // import { baseChoices } from './cuts/base'
 // import type { MealKeys } from './cuts/types'
 
-import { getNewNonTraining } from './cuts/base/non_training.js'
-import {getNewLightFirstThingTraining} from './cuts/base/light/first_thing.js'
+import { getNewNonTraining } from './cuts/base/non_training'
+import { getNewLightFirstThingTraining } from './cuts/base/light/first_thing'
+import { getNewLightAfterOneTraining } from './cuts/base/light/after_one'
+import { getNewLightAfterTwoTraining } from './cuts/base/light/after_two'
+
 import { LinkedList } from './classes/linked_list'
 
 import TimeInput from './time-input'
 import NewMeal from './new_meal'
 
 type State = {
-  dailyTrainingPlan: LinkedList,
+  dailyTrainingPlanIndex: number,
   waking: string,
   first: ?string,
   second: ?string,
@@ -39,10 +42,12 @@ class App extends Component<*, State> {
     this.baseTrainingPlans = [
       getNewNonTraining(this.handleNewMealTime),
       getNewLightFirstThingTraining(this.handleNewMealTime),
+      getNewLightAfterOneTraining(this.handleNewMealTime),
+      getNewLightAfterTwoTraining(this.handleNewMealTime),
     ]
 
     this.state = {
-      dailyTrainingPlan: this.baseTrainingPlans[0],
+      dailyTrainingPlanIndex: 0,
       waking: '',
       first: null,
       second: null,
@@ -53,19 +58,22 @@ class App extends Component<*, State> {
     }
   }
 
-  getMomentFromString(numberTime: number, addTime: number) {
-    return moment().hour(numberTime).minute(0).second(0).add(addTime, 'h')
-  }
-
   /* eslint-disable no-undef */
   handleChooseDailyTrainingPlan = (event: any) => {
     this.setState({
-      dailyTrainingPlan: this.baseTrainingPlans[event.target.value],
+      dailyTrainingPlanIndex: event.target.value,
     })
   }
 
+  getDailyTrainingPlan = () => {
+    return this.baseTrainingPlans[this.state.dailyTrainingPlanIndex]
+  }
+
   handleWakingTimeSubmit = (input: any) => {
-    this.state.dailyTrainingPlan.setMealTimeByName('first', moment({ hour: input, minute: 5 }))
+    const dailyTrainingPlan = this.getDailyTrainingPlan()
+
+    // add check to only see first meal IF first meal is affected by wake time (it's not if 'second'.updates is BOTH or PREV
+    dailyTrainingPlan.setMealTimeByName('first', moment({ hour: input, minute: 5 }))
 
     this.setState({
       waking: input,
@@ -79,8 +87,8 @@ class App extends Component<*, State> {
   }
 
   render() {
-    const { dailyTrainingPlan } = this.state
-    console.log(dailyTrainingPlan)
+    const dailyTrainingPlan = this.getDailyTrainingPlan()
+
     return (
       <div className="App">
         <div className="App-header">
@@ -94,7 +102,7 @@ class App extends Component<*, State> {
               <label className='column-title'>
                 {'What is your training plan for today?'}
               </label>
-              <select className='column-title' value={this.state.dailyTrainingPlan} onChange={this.handleChooseDailyTrainingPlan}>
+              <select className='column-title' value={this.state.dailyTrainingPlanIndex} onChange={this.handleChooseDailyTrainingPlan}>
                 {
                   this.baseTrainingPlans.map((linkedList, i) => <option key={i} value={i}>{linkedList.title}</option>)
                 }
@@ -110,7 +118,7 @@ class App extends Component<*, State> {
           <div>
             <NewMeal node={dailyTrainingPlan.head} />
             <NewMeal node={dailyTrainingPlan.head.next} />
-            <NewMeal node={dailyTrainingPlan.head.next.next} />
+            <NewMeal node={dailyTrainingPlan.head.next.next}/>
             <NewMeal node={dailyTrainingPlan.head.next.next.next} />
             <NewMeal node={dailyTrainingPlan.head.next.next.next.next} />
             <NewMeal node={dailyTrainingPlan.head.next.next.next.next.next} />

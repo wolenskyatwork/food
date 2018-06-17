@@ -1,6 +1,6 @@
 // @flow
 
-import { Node, ranges } from '../../classes/node'
+import { Node, ranges, UPDATES } from '../../classes/node'
 import { LinkedList } from '../../classes/linked_list'
 
 export function getNewNonTraining(newMealCallback: Function)  {
@@ -17,6 +17,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
         workoutCarbs: 0,
       },
       subtitle: 'waking',
+      updates: UPDATES.NEXT,
     },
     {
       name: 'second',
@@ -30,6 +31,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
         workoutCarbs: 0,
       },
       subtitle: '3-5 hours after last meal',
+      updates: UPDATES.NEXT,
     },
     {
       name: 'third',
@@ -43,6 +45,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
         workoutCarbs: 0,
       },
       subtitle: '3-5 hours after last meal',
+      updates: UPDATES.NEXT,
     },
     {
       name: 'fourth',
@@ -56,6 +59,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
         workoutCarbs: 0,
       },
       subtitle: '3-5 hours after last meal',
+      updates: UPDATES.NEXT,
     },
     {
       name: 'fifth',
@@ -69,6 +73,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
         workoutCarbs: 0,
       },
       subtitle: 'bedtime',
+      updates: UPDATES.NONE,
     },
   ]
 

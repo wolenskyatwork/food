@@ -14,15 +14,6 @@ type State = {
   backgroundColor: 'white' | 'purple',
 }
 
-// import me
-type Amounts = {
-  protein: number,
-  veggies: number,
-  fat: number,
-  carbs: number,
-  workoutCarbs: number,
-}
-
 class NewMeal extends Component<Props, State> {
   constructor() {
     super()

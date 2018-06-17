@@ -12,13 +12,14 @@ export class LinkedList {
   constructor(title: string) {
     this.nodes = {}
     this.title = title
+    this.setMealTimeByName = this.setMealTimeByName.bind(this)
   }
 
   setMealTimeByName(name: string, time: Moment) {
     const nodeByName = this.getNodeByName(name)
     console.log(time.format("h:mm a"), nodeByName.getName())
     nodeByName && nodeByName.setMealTime(time)
-    console.log(nodeByName && nodeByName.getMealTimeAsString())
+    console.log(nodeByName && nodeByName.getMealTimeAsString(), nodeByName.getName())
   }
 
   push(node: Node) {

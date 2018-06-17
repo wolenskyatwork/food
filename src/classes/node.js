@@ -9,13 +9,33 @@ type Range = {
 const emptyRange: Range = { earliest: null, latest: null }
 const threeFiveRange: Range = { earliest: 3, latest: 5 }
 const twoFourRange: Range = { earliest: 2, latest: 4 }
+const oneThreeRange: Range = { earliest: 1, latest: 3 }
 const twentyMinRange: Range = { earliest: 0.33, latest: 0.33 }
+const fortyMinuteRange: Range = { earliest: 0.66, latest: 0.66 }
 
 export const ranges: { [string]: Range } = {
   emptyRange,
   threeFiveRange,
   twentyMinRange,
   twoFourRange,
+  oneThreeRange,
+  fortyMinuteRange,
+}
+
+export type Amounts = {
+  protein: number,
+  veggies: number,
+  fat: number,
+  carbs: number,
+  workoutCarbs: number,
+}
+
+export type Updates = 'prev' | 'next' | 'none' | 'prevAndNext'
+export const UPDATES: { [string]: Updates  } = {
+  PREV: 'prev',
+  NEXT: 'next',
+  NONE: 'none',
+  BOTH: 'prevAndNext',
 }
 
 type NodeConfig = {
@@ -24,6 +44,7 @@ type NodeConfig = {
   isWorkout: boolean,
   amounts: Amounts,
   subtitle: string,
+  updates: Updates,
 }
 
 export class Node {
@@ -37,6 +58,7 @@ export class Node {
   isWorkout: boolean
   subtitle: string
   amounts: Amounts
+  updates: Updates
   newMealCallback: (string, string) => void
 
   constructor(nodeConfig: NodeConfig, newMealCallback: (string, string) => void) {
@@ -46,6 +68,7 @@ export class Node {
       isWorkout,
       amounts,
       subtitle,
+      updates,
     } = nodeConfig
 
     this.name = name
@@ -54,17 +77,22 @@ export class Node {
     this.amounts = amounts
     this.subtitle = subtitle
     this.newMealCallback = newMealCallback
+    this.updates = updates
   }
 
   setMealTime(time: Moment) {
     this.mealTime = time
-    console.log(time.format("h:mm a"))
     this.newMealCallback(this.getName(), this.getMealTimeAsString())
-    // this.prev && this.prev.getUpdateFromNext(time)
-    this.next && this.next.getUpdateFromPrev(time)
+
+    if (this.updates === UPDATES.NEXT || this.updates === UPDATES.BOTH) {
+      this.next && this.next.getUpdateFromPrev(time)
+    }
+
+    if (this.updates === UPDATES.PREV || this.updates === UPDATES.BOTH) {
+      this.prev && this.prev.getUpdateFromNext(time)
+    }
   }
 
-  // called on 'next' with new meal time to trigger updates
   getUpdateFromPrev(prevTime: Moment) {
     this.startTime = moment(prevTime).add(this.range.earliest, 'hours')
     if (!this.mealTime || this.mealTime !== this.startTime) {
@@ -73,8 +101,10 @@ export class Node {
   }
 
   getUpdateFromNext(nextTime: Moment) {
-    // this.endTime = nextTime.subtract(this.range.latest, 'hours') //
-    // console.log(this.endTime, 'no idea how to do this')
+    this.endTime = moment(nextTime).subtract(this.range.earliest, 'hours')
+    if (!this.mealTime || this.mealTime !== this.endTime) {
+      this.setMealTime(this.endTime)
+    }
   }
 
   getIsWorkout(): boolean {
