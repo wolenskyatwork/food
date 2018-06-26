@@ -8,15 +8,10 @@ import muaythai from './images/muaythai.svg'
 import './App.css'
 import FoodColumn from './food-column'
 import Foods from './foods'
-// import { baseChoices } from './cuts/base'
-// import type { MealKeys } from './cuts/types'
-
-import { getNewNonTraining } from './cuts/base/non_training'
-import { getNewLightFirstThingTraining } from './cuts/base/light/first_thing'
-import { getNewLightAfterOneTraining } from './cuts/base/light/after_one'
-import { getNewLightAfterTwoTraining } from './cuts/base/light/after_two'
 
 import { LinkedList } from './classes/linked_list'
+
+import { baseTrainingPlans } from './cuts/base/index'
 
 import TimeInput from './time-input'
 import NewMeal from './new_meal'
@@ -24,6 +19,7 @@ import NewMeal from './new_meal'
 type State = {
   dailyTrainingPlanIndex: number,
   waking: string,
+  workout: string,
   first: ?string,
   second: ?string,
   third: ?string,
@@ -39,16 +35,12 @@ class App extends Component<*, State> {
     super()
 
     // I can take this and make it somewhere else
-    this.baseTrainingPlans = [
-      getNewNonTraining(this.handleNewMealTime),
-      getNewLightFirstThingTraining(this.handleNewMealTime),
-      getNewLightAfterOneTraining(this.handleNewMealTime),
-      getNewLightAfterTwoTraining(this.handleNewMealTime),
-    ]
+    this.baseTrainingPlans = baseTrainingPlans(this.handleNewMealTime)
 
     this.state = {
       dailyTrainingPlanIndex: 0,
       waking: '',
+      workout: '',
       first: null,
       second: null,
       third: null,
@@ -72,11 +64,25 @@ class App extends Component<*, State> {
   handleWakingTimeSubmit = (input: any) => {
     const dailyTrainingPlan = this.getDailyTrainingPlan()
 
-    // add check to only see first meal IF first meal is affected by wake time (it's not if 'second'.updates is BOTH or PREV
-    dailyTrainingPlan.setMealTimeByName('first', moment({ hour: input, minute: 5 }))
+    if (dailyTrainingPlan.get)
+    dailyTrainingPlan.setMealTimeByName('first', this.mapInputToMoment(input))
 
     this.setState({
       waking: input,
+    })
+  }
+
+  mapInputToMoment = (input: any): Moment => {
+    return moment(input, 'hh:mm a')
+  }
+
+  handleWorkoutTimeSubmit = (input: any) => {
+    const dailyTrainingPlan = this.getDailyTrainingPlan()
+
+    dailyTrainingPlan.setWorkoutMealTime(this.mapInputToMoment(input))
+
+    this.setState({
+      workout: input,
     })
   }
 
@@ -96,7 +102,7 @@ class App extends Component<*, State> {
           <img src={chicken} className="App-logo" alt="logo" />
           <img src={biker} className="App-logo" alt="logo" />
         </div>
-        <div className='side-padding'>
+        <div className='meals-container'>
           <div className='padding'>
             <form>
               <label className='column-title'>
@@ -115,7 +121,12 @@ class App extends Component<*, State> {
             <TimeInput label={'waking time'} handleSubmit={this.handleWakingTimeSubmit} />
           </div>
 
-          <div>
+            <div>
+                <div>When will you work out?</div>
+                <TimeInput label={'workout time'} handleSubmit={this.handleWorkoutTimeSubmit} />
+            </div>
+
+          <div className='meal-list'>
             <NewMeal node={dailyTrainingPlan.head} />
             <NewMeal node={dailyTrainingPlan.head.next} />
             <NewMeal node={dailyTrainingPlan.head.next.next}/>

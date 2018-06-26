@@ -27,8 +27,7 @@ class NewMeal extends Component<Props, State> {
     const { node } = this.props
 
     if (node) {
-      const time = moment({ hour: input })
-      node.setMealTime(time)
+      node.setMealTime(moment(input, 'hh:mm a'))
     }
   }
 
@@ -39,7 +38,7 @@ class NewMeal extends Component<Props, State> {
       return <div>This meal isnt set up yet</div>
     }
     const amounts: Amounts = node.getAmounts()
-    const classes = 'Meal flex-box column sixth'
+    const classes = 'Meal sixth'
 
     return (
       <div className={`${classes} ${this.state.backgroundColor}`}>
@@ -55,7 +54,6 @@ class NewMeal extends Component<Props, State> {
         </div>
 
         <div>
-          <div>When will you actually eat this meal or finish this workout?</div>
           <TimeInput label={'time'} handleSubmit={this.handleMealTimeSubmit} />
         </div>
 

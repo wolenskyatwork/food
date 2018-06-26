@@ -17,9 +17,26 @@ export class LinkedList {
 
   setMealTimeByName(name: string, time: Moment) {
     const nodeByName = this.getNodeByName(name)
-    console.log(time.format("h:mm a"), nodeByName.getName())
     nodeByName && nodeByName.setMealTime(time)
-    console.log(nodeByName && nodeByName.getMealTimeAsString(), nodeByName.getName())
+  }
+
+  setWorkoutMealTime(time: Moment) {
+    let workoutNode = null
+    let currNode = this.head
+
+    while (!workoutNode) {
+      if (currNode.isWorkout) {
+        workoutNode = currNode
+      } else {
+        currNode = currNode.getNext()
+      }
+    }
+
+    if (workoutNode) {
+      workoutNode.setMealTime(time)
+    } else {
+      console.warn('no workout node was found')
+    }
   }
 
   push(node: Node) {
@@ -55,6 +72,4 @@ export class LinkedList {
       node = node.next
     }
   }
-
-  // node value will map to node for constant time access
 }

@@ -22,7 +22,7 @@ class CarbChooser extends Component<Props, State> {
 
   }
 
-  handleChange(event: any) {
+  handleChange = (event: any) => {
     this.setState({
       carb: event.target.value,
     })
