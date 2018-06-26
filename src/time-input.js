@@ -29,6 +29,9 @@ class TimeInput extends Component<Props, State> {
   handleSubmit = (event: any) => {
     event.preventDefault()
     this.props.handleSubmit(this.state.value)
+    this.setState({
+      value: '',
+    })
   }
 
   render() {

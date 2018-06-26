@@ -53,6 +53,7 @@ class App extends Component<*, State> {
 
   /* eslint-disable no-undef */
   handleChooseDailyTrainingPlan = (event: any) => {
+    this.baseTrainingPlans = baseTrainingPlans(this.handleNewMealTime) // reset with no nodes
     this.setState({
       dailyTrainingPlanIndex: event.target.value,
     })
