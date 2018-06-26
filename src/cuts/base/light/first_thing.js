@@ -17,7 +17,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
         workoutCarbs: 35,
       },
       subtitle: 'Drink 2/3 of workout shake upon waking, 1/3 during workout',
-      updates: UPDATES.NONE,
+      updates: UPDATES.NEXT,
     },
     {
       name: 'second',
@@ -31,7 +31,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
         workoutCarbs: 0,
       },
       subtitle: '20 minutes after workout is over',
-      updates: UPDATES.PREV,
+      updates: UPDATES.NEXT,
     },
     {
       name: 'third',
@@ -45,7 +45,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
         workoutCarbs: 0,
       },
       subtitle: '2-4 hours after last meal',
-      updates: UPDATES.PREV,
+      updates: UPDATES.NEXT,
     },
     {
       name: 'fourth',
@@ -59,7 +59,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
         workoutCarbs: 0,
       },
       subtitle: '3-5 hours after last meal',
-      updates: UPDATES.PREV,
+      updates: UPDATES.NEXT,
     },
     {
       name: 'fifth',
@@ -73,7 +73,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
         workoutCarbs: 0,
       },
       subtitle: '3-5 hours after last meal',
-      updates: UPDATES.PREV,
+      updates: UPDATES.NEXT,
     },
     {
       name: 'sixth',

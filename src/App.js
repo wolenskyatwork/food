@@ -10,6 +10,7 @@ import FoodColumn from './food-column'
 import Foods from './foods'
 
 import { LinkedList } from './classes/linked_list'
+import { UPDATES } from './classes/node'
 
 import { baseTrainingPlans } from './cuts/base/index'
 
@@ -63,9 +64,13 @@ class App extends Component<*, State> {
 
   handleWakingTimeSubmit = (input: any) => {
     const dailyTrainingPlan = this.getDailyTrainingPlan()
+    const secondNode = dailyTrainingPlan.getNodeByName('second')
+    if (secondNode.updates === UPDATES.BOTH || secondNode.updates === UPDATES.PREV) {
+      // no need to update
+    } else {
+      dailyTrainingPlan.setMealTimeByName('first', this.mapInputToMoment(input))
+    }
 
-    if (dailyTrainingPlan.get)
-    dailyTrainingPlan.setMealTimeByName('first', this.mapInputToMoment(input))
 
     this.setState({
       waking: input,
