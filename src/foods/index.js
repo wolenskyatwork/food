@@ -50,6 +50,8 @@ export const carbPercentages = {
   'Dry Oatmeal': 0.7143,
   'Cooked Sweet Potatoes': 0.2,
   'Cooked Quinoa': 0.35,
+  'Rice Cakes': 7/9,
+  'Coconut Water': 11/157.8,
   Strawberries: 0.08,
   Bananas: 0.23,
   Blueberries: 0.15,

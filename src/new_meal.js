@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 
-import TimeInput from './time-input'
+import TimeInput from './new-time-input'
 import CarbChooser from './carb-chooser'
 
 type Props = {
@@ -41,7 +41,8 @@ class NewMeal extends Component<Props, State> {
     const classes = 'Meal sixth'
 
     return (
-      <div className={`${classes} ${this.state.backgroundColor}`}>
+      <div className={`${classes} ${this.state.backgroundColor}`}
+           onClick={() => this.setState({ backgroundColor: 'purple'})}>
         <div className='meal-title'>
           <div className='column-title'>{node.getName()} meal</div>
           {node.getIsWorkout() &&
@@ -50,11 +51,10 @@ class NewMeal extends Component<Props, State> {
         </div>
         <div className='timeframe'>
           <div className='column-subtitle'>{node.getSubtitle()}</div>
-          <div className='column-subtitle'>{node.getMealTimeAsString()}</div>
         </div>
 
         <div>
-          <TimeInput label={'time'} handleSubmit={this.handleMealTimeSubmit} />
+          <TimeInput valueInput={node.getMealTimeAsString()} handleSubmit={this.handleMealTimeSubmit} />
         </div>
 
         <div>
@@ -100,8 +100,8 @@ class NewMeal extends Component<Props, State> {
               />
             </div>
            */}
-          { amounts.carbs !== 0 &&
-            <CarbChooser amount={amounts.carbs}/>
+          { (amounts.carbs !== 0 || amounts.workoutCarbs !== 0) &&
+            <CarbChooser amount={amounts.carbs || amounts.workoutCarbs}/>
           }
         </div>
       </div>
