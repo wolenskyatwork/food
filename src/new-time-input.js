@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react'
 
+import pencil from './images/pencils.svg'
+
 type Props = {
   valueInput: string,
   handleSubmit: Function,
@@ -57,6 +59,7 @@ class TimeInput extends Component<Props, State> {
           <div onKeyPress={this.handleKeyPress}>
             <input type='text' value={this.state.value} onChange={this.handleChange} />
           </div> : <div>{this.state.value}</div>}
+        <img src={pencil} className='pencil' alt={'pencil'} />
       </div>
     )
   }

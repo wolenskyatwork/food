@@ -28,13 +28,15 @@
   padding: 10px;
 }
 
-.sixth {
-  flex-basis: 16.667%;
-}
-
 .column-title {
   font-size: 22px;
   font-weight: bold;
+}
+
+.meal-header {
+  background-color: #372549;
+  padding: 10px;
+  color: white;
 }
 
 .meal-title {
@@ -46,8 +48,7 @@
 }
 
 .column-subtitle {
-  font-weight: bold;
-  height: 50px;
+
 }
 
 .bold {
@@ -61,16 +62,18 @@
 .Meal {
   border-radius: 4px;
   border: 1px #ccc solid;
-  padding: 10px;
   margin: 0 0 40px;
   flex-direction: column;
   display: flex;
+  width: 500px;
+  height: 300px;
 }
 
 .meal-list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 40px;
 }
 
 .white {
@@ -79,6 +82,16 @@
 
 .purple {
   background-color: purple;
+}
+
+.pencil {
+  width: 16px;
+  height: 16px;
+  padding-left: 4px;
+}
+
+.input {
+  display: flex;
 }
 
 /*@keyframes App-logo-spin {

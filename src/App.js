@@ -111,10 +111,10 @@ class App extends Component<*, State> {
         <div className='meals-container'>
           <div className='padding'>
             <form>
-              <label className='column-title'>
+              <label>
                 {'What is your training plan for today?'}
               </label>
-              <select className='column-title' value={this.state.dailyTrainingPlanIndex} onChange={this.handleChooseDailyTrainingPlan}>
+              <select value={this.state.dailyTrainingPlanIndex} onChange={this.handleChooseDailyTrainingPlan}>
                 {
                   this.baseTrainingPlans.map((linkedList, i) => <option key={i} value={i}>{linkedList.title}</option>)
                 }

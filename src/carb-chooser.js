@@ -1,10 +1,13 @@
 // @flow
 
 import React, { Component } from 'react'
-import Foods, { carbPercentages } from './foods'
+import { FoodArray } from './foods'
+
 
 type Props = {
   amount: number,
+  foodArray: FoodArray,
+  weightHash: Object, // Better way to type this
 }
 
 type State = {
@@ -16,7 +19,7 @@ class CarbChooser extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      carb: Foods.carbs[0],
+      carb: props.foodArray[0],
       value: 0,
     }
 
@@ -34,7 +37,7 @@ class CarbChooser extends Component<Props, State> {
 
   render() {
     const { carb } = this.state
-    const { amount } = this.props
+    const { amount, foodArray, weightHash } = this.props
 
     return (
       <div className='carbbox'>
@@ -42,12 +45,12 @@ class CarbChooser extends Component<Props, State> {
           <label>
             What carbs are you going to eat?
             <select value={this.state.value} onChange={this.handleChange}>
-              {Foods.carbs.map((eachcarb, i) => <option key={i} value={eachcarb}>{eachcarb}</option>)}
+              {foodArray.map((foodChoice, i) => <option key={i} value={foodChoice}>{foodChoice}</option>)}
             </select>
           </label>
         </form>
         <div>
-          <div><span className='bold'>Carb Weight: </span>{(amount / carbPercentages[carb]).toFixed(3)} grams</div>
+          <div><span className='bold'>Food Weight: </span>{(amount / weightHash[carb]).toFixed(3)} grams</div>
         </div>
       </div>
     )

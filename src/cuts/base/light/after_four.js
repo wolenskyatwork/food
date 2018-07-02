@@ -50,7 +50,7 @@ export function getNewLightAfterFourTraining(newMealCallback: Function)  {
     {
       name: 'fourth',
       range: ranges.oneThreeRange,
-      isWorkout: true,
+      isWorkout: false,
       amounts: {
         protein: 3,
         veggies: 2,

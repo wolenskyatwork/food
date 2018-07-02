@@ -5,6 +5,7 @@ import moment from 'moment'
 
 import TimeInput from './new-time-input'
 import CarbChooser from './carb-chooser'
+import Foods, { carbPercentages } from './foods'
 
 type Props = {
   node: ?Node,
@@ -34,22 +35,14 @@ class NewMeal extends Component<Props, State> {
   render() {
     const { node } = this.props
 
-    if (!node) {
-      return <div>This meal isnt set up yet</div>
-    }
+    if (!node) { return null }
     const amounts: Amounts = node.getAmounts()
     const classes = 'Meal sixth'
 
     return (
-      <div className={`${classes} ${this.state.backgroundColor}`}
-           onClick={() => this.setState({ backgroundColor: 'purple'})}>
-        <div className='meal-title'>
-          <div className='column-title'>{node.getName()} meal</div>
-          {node.getIsWorkout() &&
-            <div className=''>Workout Meal</div>
-          }
-        </div>
-        <div className='timeframe'>
+      <div className={`${classes} ${this.state.backgroundColor}`}>
+        <div className='meal-header'>
+          <div className='column-title'>{node.getIsWorkout() ? 'workout meal' : `${node.getName()} meal`}</div>
           <div className='column-subtitle'>{node.getSubtitle()}</div>
         </div>
 
@@ -88,20 +81,12 @@ class NewMeal extends Component<Props, State> {
               <span>{`${amounts.workoutCarbs} grams`}</span>
             </div>
           }
-          {/* hourRange && time &&
-            <div>
-              <div className='column-subtitle'>{moment(time).format('h:mma')}</div>
-
-              <TimeChooser
-                handleTimeChange={handleTimeChange}
-                hourRange={hourRange}
-                mealKey={number}
-                time={time}
-              />
-            </div>
-           */}
           { (amounts.carbs !== 0 || amounts.workoutCarbs !== 0) &&
-            <CarbChooser amount={amounts.carbs || amounts.workoutCarbs}/>
+            <CarbChooser
+              amount={amounts.carbs || amounts.workoutCarbs}
+              foodArray={Foods.carbs}
+              weightHash={carbPercentages}
+            />
           }
         </div>
       </div>
