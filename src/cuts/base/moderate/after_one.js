@@ -3,7 +3,7 @@
 import { Node, ranges, UPDATES } from '../../../classes/node'
 import { LinkedList } from '../../../classes/linked_list'
 
-export function getNewLightAfterOneTraining(newMealCallback: Function)  {
+export function getNewModerateAfterOneTraining(newMealCallback: Function)  {
   const meals = [
     {
       name: 'first',
@@ -97,7 +97,7 @@ export function getNewLightAfterOneTraining(newMealCallback: Function)  {
     },
   ]
 
-  const linkedList = new LinkedList('base light after one meal')
+  const linkedList = new LinkedList('base moderate after one meal')
 
   meals.forEach((meal) => linkedList.push(new Node(meal, newMealCallback)))
 
