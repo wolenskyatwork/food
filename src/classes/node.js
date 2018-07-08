@@ -45,6 +45,7 @@ type NodeConfig = {
   amounts: Amounts,
   subtitle: string,
   updates: Updates,
+  isShake: boolean,
 }
 
 export class Node {
@@ -69,6 +70,7 @@ export class Node {
       amounts,
       subtitle,
       updates,
+      isShake,
     } = nodeConfig
 
     this.name = name
@@ -78,6 +80,7 @@ export class Node {
     this.subtitle = subtitle
     this.newMealCallback = newMealCallback
     this.updates = updates
+    this.isShake = isShake
   }
 
   setMealTime(time: Moment) {
@@ -105,6 +108,10 @@ export class Node {
     if (!this.mealTime || this.mealTime !== this.endTime) {
       this.setMealTime(this.endTime)
     }
+  }
+
+  getIsShake(): boolean {
+    return this.isShake
   }
 
   getIsWorkout(): boolean {

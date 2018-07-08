@@ -132,6 +132,10 @@ class App extends Component<*, State> {
             </form>
           </div>
 
+          <div>{this.getDailyTrainingPlan().getWeekTotals().protein}</div>
+          <div>{this.getDailyTrainingPlan().getWeekTotals().carbs}</div>
+          <div>{this.getDailyTrainingPlan().getWeekTotals().vegetables}</div>
+
           <div>
             <div>When will you wake up?</div>
             <TimeInput label={'waking time'} handleSubmit={this.handleWakingTimeSubmit} />

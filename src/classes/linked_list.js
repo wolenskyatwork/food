@@ -3,11 +3,14 @@
 import { Node } from './node'
 import { Moment } from 'moment'
 
+type WeekTotals = { protein: number, carbs: number, vegetables: number }
+
 export class LinkedList {
   head: ?Node
   last: ?Node
   nodes: Object // @TODO I think there is a better way to type this
   title: string
+  weekTotals: WeekTotals
 
   constructor(title: string) {
     this.nodes = {}
@@ -26,7 +29,6 @@ export class LinkedList {
 
     while (!workoutNode) {
       if (currNode.isWorkout) {
-        workoutNode = currNode
       } else {
         currNode = currNode.getNext()
       }
@@ -59,6 +61,36 @@ export class LinkedList {
   getNodeByName(name: string): ?Node {
     if (this.nodes[name]) { return this.nodes[name] }
     console.warn('there is no node with the key ', name)
+  }
+
+  getWeekTotals(): WeekTotals {
+    if (this.weekTotals) return this.weekTotals
+
+    let currentNode = this.head
+
+    const weeklyTotals = {
+      protein: 0,
+      vegetables: 0,
+      carbs: 0,
+    }
+
+    while (currentNode) {
+      if (!currentNode.getIsShake()) {
+        weeklyTotals.protein = weeklyTotals.protein + currentNode.getAmounts().protein
+      }
+      weeklyTotals.vegetables = weeklyTotals.vegetables + currentNode.getAmounts().veggies
+      weeklyTotals.carbs = weeklyTotals.carbs + currentNode.getAmounts().carbs
+
+      currentNode = currentNode.getNext()
+    }
+
+    this.weekTotals = {
+      protein: weeklyTotals.protein * 7,
+      vegetables: weeklyTotals.vegetables * 7,
+      carbs: weeklyTotals.carbs * 7,
+    }
+
+    return this.weekTotals
   }
 
   printNodeByName(name: string) {

@@ -18,6 +18,7 @@ export function getNewModerateFirstThingTraining(newMealCallback: Function)  {
       },
       subtitle: 'Drink 2/3 of workout shake upon waking, 1/3 during workout',
       updates: UPDATES.NONE,
+      isShake: true,
     },
     {
       name: 'second',
@@ -32,6 +33,7 @@ export function getNewModerateFirstThingTraining(newMealCallback: Function)  {
       },
       subtitle: '20 minutes after workout is over',
       updates: UPDATES.PREV,
+      isShake: false,
     },
     {
       name: 'third',
@@ -46,6 +48,7 @@ export function getNewModerateFirstThingTraining(newMealCallback: Function)  {
       },
       subtitle: '2-4 hours after last meal',
       updates: UPDATES.PREV,
+      isShake: false,
     },
     {
       name: 'fourth',
@@ -60,6 +63,7 @@ export function getNewModerateFirstThingTraining(newMealCallback: Function)  {
       },
       subtitle: '3-5 hours after last meal',
       updates: UPDATES.PREV,
+      isShake: false,
     },
     {
       name: 'fifth',
@@ -74,6 +78,7 @@ export function getNewModerateFirstThingTraining(newMealCallback: Function)  {
       },
       subtitle: '3-5 hours after last meal',
       updates: UPDATES.PREV,
+      isShake: false,
     },
     {
       name: 'sixth',
@@ -88,6 +93,7 @@ export function getNewModerateFirstThingTraining(newMealCallback: Function)  {
       },
       subtitle: 'bedtime',
       updates: UPDATES.NONE,
+      isShake: true,
     },
   ]
 

@@ -18,6 +18,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
       },
       subtitle: 'waking',
       updates: UPDATES.NEXT,
+      isShake: false,
     },
     {
       name: 'second',
@@ -32,6 +33,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
       },
       subtitle: '3-5 hours after last meal',
       updates: UPDATES.NEXT,
+      isShake: false,
     },
     {
       name: 'third',
@@ -46,6 +48,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
       },
       subtitle: '3-5 hours after last meal',
       updates: UPDATES.NEXT,
+      isShake: false,
     },
     {
       name: 'fourth',
@@ -60,13 +63,14 @@ export function getNewNonTraining(newMealCallback: Function)  {
       },
       subtitle: '3-5 hours after last meal',
       updates: UPDATES.NEXT,
+      isShake: false,
     },
     {
       name: 'fifth',
       range: ranges.emptyRange,
       isWorkout: false,
       amounts: {
-        protein: 3,
+        protein: 30,
         veggies: 0,
         fat: 2,
         carbs: 25,
@@ -74,6 +78,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
       },
       subtitle: 'bedtime',
       updates: UPDATES.NONE,
+      isShake: true,
     },
   ]
 

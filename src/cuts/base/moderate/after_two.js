@@ -18,6 +18,7 @@ export function getNewLightAfterTwoTraining(newMealCallback: Function)  {
       },
       subtitle: 'waking',
       updates: UPDATES.NONE,
+      isShake: false,
     },
     {
       name: 'second',
@@ -32,6 +33,7 @@ export function getNewLightAfterTwoTraining(newMealCallback: Function)  {
       },
       subtitle: '1-3 hours before workout',
       updates: UPDATES.NONE,
+      isShake: false,
     },
     {
       name: 'third',
@@ -46,6 +48,7 @@ export function getNewLightAfterTwoTraining(newMealCallback: Function)  {
       },
       subtitle: 'Drink 1/2 shake during workout, 1/2 right after',
       updates: UPDATES.BOTH,
+      isShake: true,
     },
     {
       name: 'fourth',
@@ -60,6 +63,7 @@ export function getNewLightAfterTwoTraining(newMealCallback: Function)  {
       },
       subtitle: '40 minutes after workout is over',
       updates: UPDATES.NEXT,
+      isShake: false,
     },
     {
       name: 'fifth',
@@ -74,6 +78,7 @@ export function getNewLightAfterTwoTraining(newMealCallback: Function)  {
       },
       subtitle: '2-4 hours after last meal',
       updates: UPDATES.NEXT,
+      isShake: false,
     },
     {
       name: 'sixth',
@@ -88,6 +93,7 @@ export function getNewLightAfterTwoTraining(newMealCallback: Function)  {
       },
       subtitle: 'bedtime',
       updates: UPDATES.NONE,
+      isShake: true,
     },
   ]
 
