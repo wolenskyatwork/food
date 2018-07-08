@@ -1,0 +1,4 @@
+// @flow
+
+export const FETCH_DIETDAYS = 'FETCH_DIETDAYS'
+export const RECEIVE_DIETDAYS = 'RECEIVE_DIETDAYS'

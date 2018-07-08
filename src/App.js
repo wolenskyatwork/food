@@ -1,5 +1,7 @@
 // @flow
-
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as dietDaysActions from './actions/dietDaysActions'
 import React, { Component } from 'react'
 import moment from 'moment'
 import chicken from './images/chicken.svg'
@@ -27,6 +29,7 @@ type State = {
   fourth: ?string,
   fifth: ?string,
   sixth: ?string,
+  dietDays: any,
 }
 
 class App extends Component<*, State> {
@@ -48,12 +51,19 @@ class App extends Component<*, State> {
       fourth: null,
       fifth: null,
       sixth: null,
+      dietDays: null,
     }
+  }
+
+  componentWillMount() {
+    console.log(this.props)
+    this.props.dietDaysActions.fetchDietDays()
   }
 
   /* eslint-disable no-undef */
   handleChooseDailyTrainingPlan = (event: any) => {
     this.baseTrainingPlans = baseTrainingPlans(this.handleNewMealTime) // reset with no nodes
+    this.props.dietDaysActions.postDietDays('dummyChoice')
     this.setState({
       dailyTrainingPlanIndex: event.target.value,
     })
@@ -169,4 +179,16 @@ class App extends Component<*, State> {
   }
 }
 
-export default App
+function mapDispatchToProps(dispatch) {
+  return {
+    dietDaysActions: bindActionCreators(dietDaysActions, dispatch),
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    dietDays: state.dietDays,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
