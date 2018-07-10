@@ -29,10 +29,15 @@ type State = {
   fourth: ?string,
   fifth: ?string,
   sixth: ?string,
-  dietDays: any,
+  dietDayIndex: ?number,
 }
 
-class App extends Component<*, State> {
+type Props = {
+  dietDays: Array<*>,
+  dietDaysActions: any,
+}
+
+class App extends Component<Props, State> {
   baseTrainingPlans: Array<LinkedList>
 
   constructor() {
@@ -42,6 +47,7 @@ class App extends Component<*, State> {
     this.baseTrainingPlans = baseTrainingPlans(this.handleNewMealTime)
 
     this.state = {
+      dietDayIndex: null,
       dailyTrainingPlanIndex: 0,
       waking: '',
       workout: '',
@@ -51,7 +57,6 @@ class App extends Component<*, State> {
       fourth: null,
       fifth: null,
       sixth: null,
-      dietDays: null,
     }
   }
 
@@ -60,12 +65,39 @@ class App extends Component<*, State> {
     this.props.dietDaysActions.fetchDietDays()
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.dietDays && nextProps.dietDays.length) {
+        // shouldn't trigger state update from prop update
+      console.log(nextProps.dietDays, 'nextProps')
+      const today = moment.now()
+      // if (today.isSame())
+
+      const dietDayIndex = nextProps.dietDays.findIndex((dietDay) => {
+        if (dietDay.date.isSame(today, 'day')) {
+          return true;
+        }
+        return false;
+      })
+
+      console.log(dietDayIndex, 'calculated diet day index')
+
+      if (dietDayIndex !== -1) {
+        this.setState({
+          dietDayIndex,
+        })
+      }
+    }
+  }
+
   /* eslint-disable no-undef */
   handleChooseDailyTrainingPlan = (event: any) => {
     this.baseTrainingPlans = baseTrainingPlans(this.handleNewMealTime) // reset with no nodes
-    this.props.dietDaysActions.postDietDays('dummyChoice')
+
     this.setState({
       dailyTrainingPlanIndex: event.target.value,
+    }, () => {
+      this.props.dietDaysActions.postDietDays(this.getDailyTrainingPlan().getTitle())
+      this.props.dietDaysActions.fetchDietDays() // bad race conditions :/
     })
   }
 
@@ -108,9 +140,72 @@ class App extends Component<*, State> {
     })
   }
 
-  render() {
+  renderCompletedDays = () => {
+    const { dietDays } = this.props
+    console.log(this.props)
+    if (!dietDays || dietDays.length <= 0) return null
+
+    const dayBlock = (idx, completion, choice, weight) => {
+      return <div key={idx} className={'dayBlock'}>
+        <div>Weight: {weight}</div>
+        <div>Completion: {completion}</div>
+        <div>Choice: {choice}</div>
+      </div>
+    }
+
+    // not sure why sometimes this is nested and sometimes not. bad bug fix me
+    return dietDays.map && dietDays.map((dietDay, i) => dayBlock(i, dietDay.completion, dietDay.choice, dietDay.weight))
+  }
+
+  renderDietDayDaInfo() {
     const dailyTrainingPlan = this.getDailyTrainingPlan()
 
+    return (
+      <div>
+        <div>Approximate Weekly Totals</div>
+          <div>Protein: {this.getDailyTrainingPlan().getWeekTotals().protein} ounces uncooked / {this.getDailyTrainingPlan().getWeekTotals().protein / 16} pounds </div>
+          <div>Carbs: {this.getDailyTrainingPlan().getWeekTotals().carbs} grams</div>
+          <div>Veggies: {this.getDailyTrainingPlan().getWeekTotals().vegetables} handfuls</div>
+
+          <div>
+            <div>When will you wake up?</div>
+            <TimeInput label={'waking time'} handleSubmit={this.handleWakingTimeSubmit} />
+          </div>
+
+          <div>
+          <div>When will you work out?</div>
+        <TimeInput label={'workout time'} handleSubmit={this.handleWorkoutTimeSubmit} />
+        </div>
+
+        <div className={'flex-box column'}>
+          <div className='meal-list'>
+            <NewMeal node={dailyTrainingPlan.head} putFunction={this.props.dietDaysActions.updateDietDays} />
+            <NewMeal node={dailyTrainingPlan.head.next} putFunction={this.props.dietDaysActions.updateDietDays} />
+            <NewMeal node={dailyTrainingPlan.head.next.next} putFunction={this.props.dietDaysActions.updateDietDays}/>
+            <NewMeal node={dailyTrainingPlan.head.next.next.next} putFunction={this.props.dietDaysActions.updateDietDays} />
+            <NewMeal node={dailyTrainingPlan.head.next.next.next.next} putFunction={this.props.dietDaysActions.updateDietDays} />
+            <NewMeal node={dailyTrainingPlan.head.next.next.next.next.next} putFunction={this.props.dietDaysActions.updateDietDays} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  render() {
+    const { dietDayIndex } = this.state
+
+    const form = <form>
+      <label>
+        {'What is your training plan for today?'}
+      </label>
+      <select value={this.state.dailyTrainingPlanIndex} onChange={this.handleChooseDailyTrainingPlan}>
+        {
+          this.baseTrainingPlans.map((linkedList, i) => <option key={i} value={i}>{linkedList.title}</option>)
+        }
+      </select>
+    </form>
+
+    console.log(dietDayIndex, 'waaa')
     return (
       <div className="App">
         <div className="App-header">
@@ -120,39 +215,16 @@ class App extends Component<*, State> {
         </div>
         <div className='meals-container'>
           <div className='padding'>
-            <form>
-              <label>
-                {'What is your training plan for today?'}
-              </label>
-              <select value={this.state.dailyTrainingPlanIndex} onChange={this.handleChooseDailyTrainingPlan}>
-                {
-                  this.baseTrainingPlans.map((linkedList, i) => <option key={i} value={i}>{linkedList.title}</option>)
-                }
-              </select>
-            </form>
+
           </div>
 
-          <div>{this.getDailyTrainingPlan().getWeekTotals().protein}</div>
-          <div>{this.getDailyTrainingPlan().getWeekTotals().carbs}</div>
-          <div>{this.getDailyTrainingPlan().getWeekTotals().vegetables}</div>
+          { (dietDayIndex !== 0 || !dietDayIndex) && form }
+          { (dietDayIndex === 0 || dietDayIndex) && this.renderDietDayDaInfo() }
 
-          <div>
-            <div>When will you wake up?</div>
-            <TimeInput label={'waking time'} handleSubmit={this.handleWakingTimeSubmit} />
-          </div>
-
-            <div>
-                <div>When will you work out?</div>
-                <TimeInput label={'workout time'} handleSubmit={this.handleWorkoutTimeSubmit} />
+          <div className={'calendar'}>
+            <div className={'row'}>
+              {this.renderCompletedDays()}
             </div>
-
-          <div className='meal-list'>
-            <NewMeal node={dailyTrainingPlan.head} />
-            <NewMeal node={dailyTrainingPlan.head.next} />
-            <NewMeal node={dailyTrainingPlan.head.next.next}/>
-            <NewMeal node={dailyTrainingPlan.head.next.next.next} />
-            <NewMeal node={dailyTrainingPlan.head.next.next.next.next} />
-            <NewMeal node={dailyTrainingPlan.head.next.next.next.next.next} />
           </div>
 
           <div className='category flex-box'>
@@ -190,8 +262,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
+  console.log(state.dietDays)
   return {
-    dietDays: state.dietDays,
+    dietDays: state.dietDays, // fix this
   }
 }
 

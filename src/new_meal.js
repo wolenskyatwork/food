@@ -9,6 +9,7 @@ import Foods, { carbPercentages } from './foods'
 
 type Props = {
   node: ?Node,
+  putFunction: Function,
 }
 
 type State = {
@@ -44,6 +45,7 @@ class NewMeal extends Component<Props, State> {
         <div className='meal-header'>
           <div className='column-title'>{node.getIsWorkout() ? 'workout meal' : `${node.getName()} meal`}</div>
           <div className='column-subtitle'>{node.getSubtitle()}</div>
+          <div className={'complete-button'} onClick={() => this.props.putFunction(Math.random())}>Complete</div>
         </div>
 
         <div>
@@ -54,7 +56,7 @@ class NewMeal extends Component<Props, State> {
           { amounts.protein &&
             <div>
               <span className='bold'>Protein: </span>
-              <span>{`${amounts.protein} ounces`}</span>
+              <span>{`${amounts.protein} ${node.getIsShake() ? 'grams (shake)' : `ounces uncooked, ${0.69 * amounts.protein} cooked, ${amounts.protein * 6} grams`}`}</span>
             </div>
           }
           { amounts.veggies !== 0 &&

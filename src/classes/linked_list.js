@@ -27,8 +27,9 @@ export class LinkedList {
     let workoutNode = null
     let currNode = this.head
 
-    while (!workoutNode) {
+    while (!workoutNode && currNode.getNext()) {
       if (currNode.isWorkout) {
+        workoutNode = currNode
       } else {
         currNode = currNode.getNext()
       }
@@ -91,6 +92,10 @@ export class LinkedList {
     }
 
     return this.weekTotals
+  }
+
+  getTitle() {
+    return this.title
   }
 
   printNodeByName(name: string) {
