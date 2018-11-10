@@ -14,7 +14,8 @@ import Foods from './foods'
 import { LinkedList } from './classes/linked_list'
 import { UPDATES } from './classes/node'
 
-import { baseTrainingPlans } from './cuts/base/index'
+// import { baseTrainingPlans } from './cuts/base/index'
+import { firstCutTrainingPlans } from './cuts/first_cut/index'
 
 import TimeInput from './time-input'
 import NewMeal from './new_meal'
@@ -38,13 +39,16 @@ type Props = {
 }
 
 class App extends Component<Props, State> {
-  baseTrainingPlans: Array<LinkedList>
+  trainingPlans: Array<LinkedList>
 
   constructor() {
     super()
 
     // I can take this and make it somewhere else
-    this.baseTrainingPlans = baseTrainingPlans(this.handleNewMealTime)
+    // this.baseTrainingPlans = baseTrainingPlans(this.handleNewMealTime)
+    // this.firstCutTrainingPlans = firstCutTrainingPlans(this.handleNewMealTime)
+
+    this.trainingPlans = firstCutTrainingPlans(this.handleNewMealTime)
 
     this.state = {
       dietDayIndex: null,
@@ -91,18 +95,18 @@ class App extends Component<Props, State> {
 
   /* eslint-disable no-undef */
   handleChooseDailyTrainingPlan = (event: any) => {
-    this.baseTrainingPlans = baseTrainingPlans(this.handleNewMealTime) // reset with no nodes
+    this.trainingPlans = firstCutTrainingPlans(this.handleNewMealTime) // reset with no nodes
 
     this.setState({
       dailyTrainingPlanIndex: event.target.value,
     }, () => {
-      this.props.dietDaysActions.postDietDays(this.getDailyTrainingPlan().getTitle())
-      this.props.dietDaysActions.fetchDietDays() // bad race conditions :/
+      // this.props.dietDaysActions.postDietDays(this.getDailyTrainingPlan().getTitle())
+      // this.props.dietDaysActions.fetchDietDays() // bad race conditions :/
     })
   }
 
   getDailyTrainingPlan = () => {
-    return this.baseTrainingPlans[this.state.dailyTrainingPlanIndex]
+    return this.trainingPlans[this.state.dailyTrainingPlanIndex]
   }
 
   handleWakingTimeSubmit = (input: any) => {
@@ -162,11 +166,6 @@ class App extends Component<Props, State> {
 
     return (
       <div>
-        <div>Approximate Weekly Totals</div>
-          <div>Protein: {this.getDailyTrainingPlan().getWeekTotals().protein} ounces uncooked / {this.getDailyTrainingPlan().getWeekTotals().protein / 16} pounds </div>
-          <div>Carbs: {this.getDailyTrainingPlan().getWeekTotals().carbs} grams</div>
-          <div>Veggies: {this.getDailyTrainingPlan().getWeekTotals().vegetables} handfuls</div>
-
           <div>
             <div>When will you wake up?</div>
             <TimeInput label={'waking time'} handleSubmit={this.handleWakingTimeSubmit} />
@@ -177,6 +176,10 @@ class App extends Component<Props, State> {
         <TimeInput label={'workout time'} handleSubmit={this.handleWorkoutTimeSubmit} />
         </div>
 
+        <div>
+          { this.state.waking }
+          { this.state.workout }
+        </div>
         <div className={'flex-box column'}>
           <div className='meal-list'>
             <NewMeal node={dailyTrainingPlan.head} putFunction={this.props.dietDaysActions.updateDietDays} />
@@ -187,6 +190,12 @@ class App extends Component<Props, State> {
             <NewMeal node={dailyTrainingPlan.head.next.next.next.next.next} putFunction={this.props.dietDaysActions.updateDietDays} />
           </div>
         </div>
+
+        <div>Approximate Weekly Totals</div>
+        <div>Protein: {this.getDailyTrainingPlan().getWeekTotals().protein} ounces uncooked / {this.getDailyTrainingPlan().getWeekTotals().protein / 16} pounds </div>
+        <div>Carbs: {this.getDailyTrainingPlan().getWeekTotals().carbs} grams</div>
+        <div>Veggies: {this.getDailyTrainingPlan().getWeekTotals().vegetables} handfuls</div>
+
       </div>
     )
   }
@@ -200,26 +209,26 @@ class App extends Component<Props, State> {
       </label>
       <select value={this.state.dailyTrainingPlanIndex} onChange={this.handleChooseDailyTrainingPlan}>
         {
-          this.baseTrainingPlans.map((linkedList, i) => <option key={i} value={i}>{linkedList.title}</option>)
+          this.trainingPlans.map((linkedList, i) => <option key={i} value={i}>{linkedList.title}</option>)
         }
       </select>
     </form>
 
-    console.log(dietDayIndex, 'waaa')
+    // console.log(dietDayIndex, 'waaa')
     return (
       <div className="App">
-        <div className="App-header">
+        { /* <div className="App-header">
           <img src={muaythai} className="App-logo" alt="logo" />
           <img src={chicken} className="App-logo" alt="logo" />
           <img src={biker} className="App-logo" alt="logo" />
-        </div>
+        </div> */ }
         <div className='meals-container'>
           <div className='padding'>
 
           </div>
 
           { (dietDayIndex !== 0 || !dietDayIndex) && form }
-          { (dietDayIndex === 0 || dietDayIndex) && this.renderDietDayDaInfo() }
+          { /*(dietDayIndex === 0 || dietDayIndex) && */ this.renderDietDayDaInfo() }
 
           <div className={'calendar'}>
             <div className={'row'}>

@@ -39,9 +39,9 @@ const fats: FoodArray = [
 ]
 
 export const carbPercentages = {
+  'Cooked Sweet Potatoes': 0.2,
   'Cooked Rice': 0.25846,
   'Dry Oatmeal': 0.7143,
-  'Cooked Sweet Potatoes': 0.2,
   'Cooked Quinoa': 0.35,
   'Rice Cakes': 7/9,
   Strawberries: 0.08,

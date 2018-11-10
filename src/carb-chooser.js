@@ -12,7 +12,6 @@ type Props = {
 
 type State = {
   carb: string, // Carb type? Exciting
-  value: number,
 }
 
 class CarbChooser extends Component<Props, State> {
@@ -20,7 +19,6 @@ class CarbChooser extends Component<Props, State> {
     super(props)
     this.state = {
       carb: props.foodArray[0],
-      value: 0,
     }
 
   }
@@ -38,13 +36,12 @@ class CarbChooser extends Component<Props, State> {
   render() {
     const { carb } = this.state
     const { amount, foodArray, weightHash } = this.props
-
     return (
       <div className='carbbox'>
         <form onSubmit={this.handleSubmit}>
           <label>
             What carbs are you going to eat?
-            <select value={this.state.value} onChange={this.handleChange}>
+            <select value={carb} onChange={this.handleChange}>
               {foodArray.map((foodChoice, i) => <option key={i} value={foodChoice}>{foodChoice}</option>)}
             </select>
           </label>

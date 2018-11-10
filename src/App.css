@@ -52,7 +52,10 @@
 }
 
 .column-subtitle {
-
+  padding-left: 4px;
+  display: inline;
+  font-size: 18px;
+  font-weight: normal;
 }
 
 .bold {
@@ -70,14 +73,16 @@
   flex-direction: column;
   display: flex;
   height: 300px;
+  width: 29%;
 }
 
 .meal-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   margin-top: 40px;
   flex-basis: 50%;
+  flex-wrap: wrap;
 }
 
 .white {

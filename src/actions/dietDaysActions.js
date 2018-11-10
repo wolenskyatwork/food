@@ -16,33 +16,35 @@ function mapDietDays(json) {
 }
 
 export function fetchDietDays() {
-    return dispatch => {
-        return fetch('http://localhost:8080/dietDays', {
-            method: 'GET',
-            mode: 'cors',
-        }).then(response => response.json())
-            .then(json => dispatch(receiveDietDays(json)))
+    return () => { // dispatch => {
+        // return fetch('http://localhost:8080/dietDays', {
+        //     method: 'GET',
+        //     mode: 'cors',
+        // }).then(response => response.json())
+        //     .then(json => dispatch(receiveDietDays(json)))
     }
 }
 
 export function postDietDays(choice: string) {
     return () => { // turn back to dispatch when you dispatch(putResponse for response)
-        return fetch('http://localhost:8080/dietDays', {
-            method: 'POST',
-            mode: 'cors',
-            body: JSON.stringify({ choice: choice }),
-        })
+        // return fetch('http://localhost:8080/dietDays', {
+        //     method: 'POST',
+        //     mode: 'cors',
+        //     body: JSON.stringify({ choice: choice }),
+        // })
     }
 }
 
 export function updateDietDays(completion: number) {
+  console.log('update diet days')
   return () => { // turn back to dispatch when you dispatch(putResponse for response)
     return fetch('http://localhost:8080/dietDays/0', {
       method: 'PUT',
       mode: 'cors',
-      body: JSON.stringify({ completion: completion }),
-    })
+      body: JSON.stringify({ completion: .6 }),
+    }).then(thing => console.log(thing)).catch(e => console.error(e))
   }
 }
 
-
+// 0.743125   TURKEY
+// 16 oz before, 11.86 oz oafter
