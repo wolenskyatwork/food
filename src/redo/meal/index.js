@@ -2,9 +2,10 @@
 
 import React, { Component } from 'react'
 import Macro from './macros/macro'
-import Option from "../option"
-import moment from "moment"
-import TimeInput from "../../new-time-input"
+import Option from '../option'
+import moment from 'moment'
+import TimeInput from '../../new-time-input'
+import './index.css'
 
 type Props = {
   node: Node
@@ -88,7 +89,7 @@ class Meal extends Component<Props, State> {
     return (
       <div className={'meal sixth'}>
         <div className={'meal-title'}>
-          <div>{node.name} meal</div>
+          <div className={'bold'}>{node.name} meal</div>
           <div>{node.subtitle}</div>
         </div>
         <div>

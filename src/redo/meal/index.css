@@ -1,0 +1,19 @@
+
+.meal {
+    border-radius: 4px;
+    border: 1px #ccc solid;
+    margin: 10px 10px 40px;
+    flex-direction: column;
+    display: flex;
+    height: 300px;
+    width: 29%;
+    background-color: white;
+
+}
+
+.meal-title {
+    height: 50px;
+    background-color: #372549;
+    padding: 10px;
+    color: white;
+}

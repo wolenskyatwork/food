@@ -51,32 +51,12 @@
   padding-top: 50px;
 }
 
-.meal-header {
-  background-color: #372549;
-  padding: 10px;
-  color: white;
-}
-
-.meal-title {
-  height: 50px;
-}
-
 .padding {
   padding: 20px 0;
 }
 
 .bold {
   font-weight: bold;
-}
-
-.meal {
-  border-radius: 4px;
-  border: 1px #ccc solid;
-  margin: 0 0 40px;
-  flex-direction: column;
-  display: flex;
-  height: 300px;
-  width: 29%;
 }
 
 .meal-list {
