@@ -10,18 +10,7 @@ type Props = {
   node: Node
 }
 
-type State = {
-
-}
-
 class Meal extends Component<Props, State> {
-  constructor() {
-    super()
-    this.state = {
-
-    }
-  }
-
   handleMealTimeSubmit = (input: any) => {
     const { node } = this.props
 
@@ -36,7 +25,7 @@ class Meal extends Component<Props, State> {
         <Macro
           macro={'Protein'}
           options={[
-            new Option('powder', 1, 'grams'),
+            new Option('powdered protein  ', 1, 'grams'),
           ]}
           amount={25}
         />
@@ -57,7 +46,8 @@ class Meal extends Component<Props, State> {
         <Macro
           macro={'Protein'}
           options={[
-            new Option('uncooked lean meat', (112/21), 'grams'),
+            new Option('uncooked lean meat', 4.72492222, 'grams'),
+            new Option('cooked lean meat', 3.1499, 'grams'),
             new Option('egg whites', 2, 'grams'),
             new Option('powder', 3, 'scoops'),
           ]}
@@ -93,12 +83,11 @@ class Meal extends Component<Props, State> {
   }
 
   render() {
-    console.log(this.props.node)
     const { node } = this.props
 
     return (
-      <div className={'Meal sixth'}>
-        <div>
+      <div className={'meal sixth'}>
+        <div className={'meal-title'}>
           <div>{node.name} meal</div>
           <div>{node.subtitle}</div>
         </div>

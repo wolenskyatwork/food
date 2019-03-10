@@ -6,7 +6,6 @@ import './App.css'
 import { LinkedList } from './classes/linked_list'
 import { UPDATES } from './classes/node'
 
-// import { baseTrainingPlans } from './cuts/base/index'
 import { firstCutTrainingPlans } from './cuts/first_cut/index'
 
 import TimeInput from './time-input'
@@ -36,10 +35,6 @@ class App extends Component<Props, State> {
 
   constructor() {
     super()
-
-    // I can take this and make it somewhere else
-    // this.baseTrainingPlans = baseTrainingPlans(this.handleNewMealTime)
-    // this.firstCutTrainingPlans = firstCutTrainingPlans(this.handleNewMealTime)
 
     this.trainingPlans = firstCutTrainingPlans(this.handleNewMealTime)
 
@@ -97,7 +92,6 @@ class App extends Component<Props, State> {
     } else {
       dailyTrainingPlan.setMealTimeByName('first', this.mapInputToMoment(input))
     }
-
 
     this.setState({
       waking: input,
@@ -159,8 +153,6 @@ class App extends Component<Props, State> {
   }
 
   render() {
-    const { dietDayIndex } = this.state
-
     const form = <form>
       <label>
         {'What is your training plan for today?'}
