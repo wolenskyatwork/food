@@ -3,7 +3,7 @@
 import { Node, ranges, UPDATES } from '../../../classes/node'
 import { LinkedList } from '../../../classes/linked_list'
 
-const protein = [3, 3, 25, 3, 3, 25]
+const protein = [18, 18, 25, 18, 18, 25]
 const veggies = [2, 2, 0, 2, 2, 0]
 const fat = [0, 0.5, 0, 0, 0.5, 0.5]
 const carbs = [0, 35, 0, 40, 35, 15]

@@ -20,6 +20,11 @@ import { firstCutTrainingPlans } from './cuts/first_cut/index'
 import TimeInput from './time-input'
 import NewMeal from './new_meal'
 
+import Meal from './redo/meal'
+import P90xBlock from './redo/block'
+import BlockContainer from './redo/block-container'
+import { baseTrainingPlans } from "./cuts/base"
+
 type State = {
   dailyTrainingPlanIndex: number,
   waking: string,
@@ -52,7 +57,7 @@ class App extends Component<Props, State> {
 
     this.state = {
       dietDayIndex: null,
-      dailyTrainingPlanIndex: 0,
+      dailyTrainingPlanIndex: 1,
       waking: '',
       workout: '',
       first: null,
@@ -182,8 +187,8 @@ class App extends Component<Props, State> {
         </div>
         <div className={'flex-box column'}>
           <div className='meal-list'>
-            <NewMeal node={dailyTrainingPlan.head} putFunction={this.props.dietDaysActions.updateDietDays} />
-            <NewMeal node={dailyTrainingPlan.head.next} putFunction={this.props.dietDaysActions.updateDietDays} />
+            <Meal node={dailyTrainingPlan.head} putFunction={this.props.dietDaysActions.updateDietDays} />
+            <Meal node={dailyTrainingPlan.head.next} putFunction={this.props.dietDaysActions.updateDietDays} />
             <NewMeal node={dailyTrainingPlan.head.next.next} putFunction={this.props.dietDaysActions.updateDietDays}/>
             <NewMeal node={dailyTrainingPlan.head.next.next.next} putFunction={this.props.dietDaysActions.updateDietDays} />
             <NewMeal node={dailyTrainingPlan.head.next.next.next.next} putFunction={this.props.dietDaysActions.updateDietDays} />
@@ -222,7 +227,10 @@ class App extends Component<Props, State> {
           <img src={chicken} className="App-logo" alt="logo" />
           <img src={biker} className="App-logo" alt="logo" />
         </div> */ }
+
+
         <div className='meals-container'>
+
           <div className='padding'>
 
           </div>
@@ -235,6 +243,8 @@ class App extends Component<Props, State> {
               {this.renderCompletedDays()}
             </div>
           </div>
+
+          <BlockContainer />
 
           <div className='category flex-box'>
             <FoodColumn column='Vegetables' unit='small handfuls' choices={Foods.vegetables} />

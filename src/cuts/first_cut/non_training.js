@@ -10,7 +10,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
       range: ranges.emptyRange,
       isWorkout: false,
       amounts: {
-        protein: 3,
+        protein: 18,
         veggies: 2,
         fat: 0.5,
         carbs: 0,
@@ -25,7 +25,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
       range: ranges.threeFiveRange,
       isWorkout: false,
       amounts: {
-        protein: 3,
+        protein: 18,
         veggies: 2,
         fat: 0.5,
         carbs: 0,
@@ -40,7 +40,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
       range: ranges.threeFiveRange,
       isWorkout: false,
       amounts: {
-        protein: 4,
+        protein: 24,
         veggies: 2,
         fat: 0.5,
         carbs: 20,
@@ -55,7 +55,7 @@ export function getNewNonTraining(newMealCallback: Function)  {
       range: ranges.threeFiveRange,
       isWorkout: false,
       amounts: {
-        protein: 4,
+        protein: 24,
         veggies: 2,
         fat: 0.5,
         carbs: 25,

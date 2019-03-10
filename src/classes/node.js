@@ -118,6 +118,10 @@ export class Node {
     return this.isWorkout
   }
 
+  getIsWaking(): boolean {
+    return this.name === 'first' && !this.isWorkout
+  }
+
   getAmounts(): Amounts {
     return this.amounts
   }

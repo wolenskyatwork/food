@@ -10,7 +10,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
       range: ranges.emptyRange,
       isWorkout: true,
       amounts: {
-        protein: 25,
+        protein: 18,
         veggies: 0,
         fat: 0,
         carbs: 0,
@@ -25,7 +25,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
       range: ranges.twentyMinRange,
       isWorkout: false,
       amounts: {
-        protein: 3,
+        protein: 18,
         veggies: 2,
         fat: 0,
         carbs: 40,
@@ -40,7 +40,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
       range: ranges.twoFourRange,
       isWorkout: false,
       amounts: {
-        protein: 3,
+        protein: 18,
         veggies: 2,
         fat: 0,
         carbs: 35,
@@ -55,7 +55,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
       range: ranges.threeFiveRange,
       isWorkout: false,
       amounts: {
-        protein: 3,
+        protein: 18,
         veggies: 2,
         fat: 0.5,
         carbs: 15,
@@ -70,7 +70,7 @@ export function getNewLightFirstThingTraining(newMealCallback: Function)  {
       range: ranges.threeFiveRange,
       isWorkout: false,
       amounts: {
-        protein: 3,
+        protein: 18,
         veggies: 2,
         fat: 0.5,
         carbs: 15,

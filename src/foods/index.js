@@ -1,5 +1,7 @@
 // @flow
 
+import React from "react"
+
 export type FoodArray = Array<string>
 
 const vegetables: FoodArray = [
@@ -39,22 +41,21 @@ const fats: FoodArray = [
 ]
 
 export const carbPercentages = {
-  'Cooked Sweet Potatoes': 0.2,
-  'Cooked Rice': 0.25846,
-  'Dry Oatmeal': 0.7143,
-  'Cooked Quinoa': 0.35,
-  'Rice Cakes': 7/9,
-  Strawberries: 0.08,
-  Bananas: 0.23,
-  Blueberries: 0.15,
-  Apple: 0.14,
+  'Cooked Sweet Potatoes': 3.40493150685, // 0.2,
+  // Cooked rice: 910 g = 235.2 g of carbs
+  'Rice': (910 / 235.2),
+  // 'Cooked Rice': 0.25846,
+  Strawberries: 12.5, // (100 g strawberries = 8 g carb)
+  Bananas: (100 / 23), // 100 g = 23 g c
+  Blueberries: (100 / 14),
+  Apple: (100 / 14),
 }
 
 export const workoutCarbPercentages = {
   'Coconut Water': 11/157.8,
-  'Gatorade': 1,
-  'Powerade': 1,
-  'Fruit Juice': 1,
+  // 'Gatorade': 1,
+  // 'Powerade': 1,
+  // 'Fruit Juice': 1,
 }
 
 const workoutCarbs = Object.keys(workoutCarbPercentages)

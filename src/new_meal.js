@@ -63,11 +63,11 @@ class NewMeal extends Component<Props, State> {
           <TimeInput valueInput={node.getMealTimeAsString()} handleSubmit={this.handleMealTimeSubmit} />
         </div>
 
-        <div>
+          <div>
           { amounts.protein &&
             <div>
               <span className='bold'>Protein: </span>
-              <span>{`${amounts.protein} ${node.getIsShake() ? 'grams (shake)' : `ounces uncooked, ${0.69 * amounts.protein} cooked, ${amounts.protein * 6} grams`}`}</span>
+              <span>{`${node.getIsShake() ? `${amounts.protein}grams (shake)` : `${112/21 * 0.69 * amounts.protein} grams uncooked`}`}</span>
             </div>
           }
           { amounts.veggies !== 0 &&

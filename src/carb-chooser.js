@@ -36,6 +36,7 @@ class CarbChooser extends Component<Props, State> {
   render() {
     const { carb } = this.state
     const { amount, foodArray, weightHash } = this.props
+
     return (
       <div className='carbbox'>
         <form onSubmit={this.handleSubmit}>
@@ -47,7 +48,8 @@ class CarbChooser extends Component<Props, State> {
           </label>
         </form>
         <div>
-          <div><span className='bold'>Food Weight: </span>{(amount / weightHash[carb]).toFixed(3)} grams</div>
+          <div><span className='bold'>Food Weight: </span>{(amount * weightHash[carb]).toFixed(3)} grams cooked</div>
+          <div>{amount} grams of carbohydrates only</div>
         </div>
       </div>
     )
