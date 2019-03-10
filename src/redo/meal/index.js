@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import Macro from './macros/macro'
 import Option from "../option"
 import moment from "moment"
+import TimeInput from "../../new-time-input"
 
 type Props = {
   node: Node
@@ -100,6 +101,9 @@ class Meal extends Component<Props, State> {
         <div>
           <div>{node.name} meal</div>
           <div>{node.subtitle}</div>
+        </div>
+        <div>
+          <TimeInput valueInput={node.getMealTimeAsString()} handleSubmit={this.handleMealTimeSubmit} />
         </div>
         <div>
           { node.isWorkout ? this.renderWorkoutMeal(node.amounts.workoutCarbs) : this.renderRegularMeal(node) }

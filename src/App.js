@@ -1,15 +1,7 @@
 // @flow
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import * as dietDaysActions from './actions/dietDaysActions'
 import React, { Component } from 'react'
 import moment from 'moment'
-import chicken from './images/chicken.svg'
-import biker from './images/biker.svg'
-import muaythai from './images/muaythai.svg'
 import './App.css'
-import FoodColumn from './food-column'
-import Foods from './foods'
 
 import { LinkedList } from './classes/linked_list'
 import { UPDATES } from './classes/node'
@@ -18,12 +10,8 @@ import { UPDATES } from './classes/node'
 import { firstCutTrainingPlans } from './cuts/first_cut/index'
 
 import TimeInput from './time-input'
-import NewMeal from './new_meal'
-
 import Meal from './redo/meal'
-import P90xBlock from './redo/block'
 import BlockContainer from './redo/block-container'
-import { baseTrainingPlans } from "./cuts/base"
 
 type State = {
   dailyTrainingPlanIndex: number,
@@ -69,26 +57,16 @@ class App extends Component<Props, State> {
     }
   }
 
-  componentWillMount() {
-    console.log(this.props)
-    this.props.dietDaysActions.fetchDietDays()
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.dietDays && nextProps.dietDays.length) {
-        // shouldn't trigger state update from prop update
-      console.log(nextProps.dietDays, 'nextProps')
       const today = moment.now()
-      // if (today.isSame())
 
       const dietDayIndex = nextProps.dietDays.findIndex((dietDay) => {
         if (dietDay.date.isSame(today, 'day')) {
-          return true;
+          return true
         }
-        return false;
+        return false
       })
-
-      console.log(dietDayIndex, 'calculated diet day index')
 
       if (dietDayIndex !== -1) {
         this.setState({
@@ -104,9 +82,6 @@ class App extends Component<Props, State> {
 
     this.setState({
       dailyTrainingPlanIndex: event.target.value,
-    }, () => {
-      // this.props.dietDaysActions.postDietDays(this.getDailyTrainingPlan().getTitle())
-      // this.props.dietDaysActions.fetchDietDays() // bad race conditions :/
     })
   }
 
@@ -149,24 +124,7 @@ class App extends Component<Props, State> {
     })
   }
 
-  renderCompletedDays = () => {
-    const { dietDays } = this.props
-    console.log(this.props)
-    if (!dietDays || dietDays.length <= 0) return null
-
-    const dayBlock = (idx, completion, choice, weight) => {
-      return <div key={idx} className={'dayBlock'}>
-        <div>Weight: {weight}</div>
-        <div>Completion: {completion}</div>
-        <div>Choice: {choice}</div>
-      </div>
-    }
-
-    // not sure why sometimes this is nested and sometimes not. bad bug fix me
-    return dietDays.map && dietDays.map((dietDay, i) => dayBlock(i, dietDay.completion, dietDay.choice, dietDay.weight))
-  }
-
-  renderDietDayDaInfo() {
+  renderDietDayInfo() {
     const dailyTrainingPlan = this.getDailyTrainingPlan()
 
     return (
@@ -187,19 +145,14 @@ class App extends Component<Props, State> {
         </div>
         <div className={'flex-box column'}>
           <div className='meal-list'>
-            <Meal node={dailyTrainingPlan.head} putFunction={this.props.dietDaysActions.updateDietDays} />
-            <Meal node={dailyTrainingPlan.head.next} putFunction={this.props.dietDaysActions.updateDietDays} />
-            <NewMeal node={dailyTrainingPlan.head.next.next} putFunction={this.props.dietDaysActions.updateDietDays}/>
-            <NewMeal node={dailyTrainingPlan.head.next.next.next} putFunction={this.props.dietDaysActions.updateDietDays} />
-            <NewMeal node={dailyTrainingPlan.head.next.next.next.next} putFunction={this.props.dietDaysActions.updateDietDays} />
-            <NewMeal node={dailyTrainingPlan.head.next.next.next.next.next} putFunction={this.props.dietDaysActions.updateDietDays} />
+            <Meal node={dailyTrainingPlan.head} />
+            <Meal node={dailyTrainingPlan.head.next} />
+            <Meal node={dailyTrainingPlan.head.next.next}/>
+            <Meal node={dailyTrainingPlan.head.next.next.next} />
+            <Meal node={dailyTrainingPlan.head.next.next.next.next} />
+            <Meal node={dailyTrainingPlan.head.next.next.next.next.next} />
           </div>
         </div>
-
-        <div>Approximate Weekly Totals</div>
-        <div>Protein: {this.getDailyTrainingPlan().getWeekTotals().protein} ounces uncooked / {this.getDailyTrainingPlan().getWeekTotals().protein / 16} pounds </div>
-        <div>Carbs: {this.getDailyTrainingPlan().getWeekTotals().carbs} grams</div>
-        <div>Veggies: {this.getDailyTrainingPlan().getWeekTotals().vegetables} handfuls</div>
 
       </div>
     )
@@ -219,15 +172,8 @@ class App extends Component<Props, State> {
       </select>
     </form>
 
-    // console.log(dietDayIndex, 'waaa')
     return (
       <div className="App">
-        { /* <div className="App-header">
-          <img src={muaythai} className="App-logo" alt="logo" />
-          <img src={chicken} className="App-logo" alt="logo" />
-          <img src={biker} className="App-logo" alt="logo" />
-        </div> */ }
-
 
         <div className='meals-container'>
 
@@ -235,56 +181,16 @@ class App extends Component<Props, State> {
 
           </div>
 
-          { (dietDayIndex !== 0 || !dietDayIndex) && form }
-          { /*(dietDayIndex === 0 || dietDayIndex) && */ this.renderDietDayDaInfo() }
-
-          <div className={'calendar'}>
-            <div className={'row'}>
-              {this.renderCompletedDays()}
-            </div>
-          </div>
+          { form }
+          { this.renderDietDayInfo() }
 
           <BlockContainer />
 
-          <div className='category flex-box'>
-            <FoodColumn column='Vegetables' unit='small handfuls' choices={Foods.vegetables} />
-            <FoodColumn column='Protein' unit='oz' choices={Foods.meats} />
-            <FoodColumn column='Fats' unit='servings' choices={Foods.fats} />
-            <FoodColumn column='Carbs' unit='grams' choices={Foods.carbs} />
-            <FoodColumn column='Workout Carbs' unit='grams' choices={Foods.workoutCarbs} />
-          </div>
-          <div>
-            <div>18 g of protein is 165.6 grams of egg whites</div>
-            <div>3oz uncooked chicken about 2.1 oz cooked. (.69)</div>
-            <div>Uncooked rice: 280g = 235.2 g of carbs
-            Cooked rice: 910 g = 235.2 g of carbs
-
-            Cooked rice: 0.25846 g of carbs per g of rice
-            50 g of uncooked rice is 42 grams of carbs
-            </div>
-            <div>23.81 oz uncooked chicken, 16.51 oz cooked</div>
-            <div>Uncooked quinoa: 192 g, cooked: 388g
-              136g carbs in 388g quinoa
-              0.35 g carbs per g quinoa
-            </div>
-          </div>
         </div>
       </div>
     )
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dietDaysActions: bindActionCreators(dietDaysActions, dispatch),
-  }
-}
 
-function mapStateToProps(state) {
-  console.log(state.dietDays)
-  return {
-    dietDays: state.dietDays, // fix this
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

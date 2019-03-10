@@ -40,7 +40,7 @@ class Macro extends Component<Props, State> {
         <div className='display-flex'>{`${this.props.macro}:`}<Chooser
           options={options}
           optionCallback={this.optionCallback}
-        /></div>{currentOption.name}{(amount * currentOption.converter).toFixed(1)} {currentOption.unit}
+        /></div>{(amount * currentOption.converter).toFixed(1)} {currentOption.unit}
       </div>
     )
   }
